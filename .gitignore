@@ -16,3 +16,6 @@ build/web/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Release 打包产物
+*.zip
