@@ -89,6 +89,40 @@ godot --headless --path . --export-release "Web" "$(pwd)/docs/index.html"
 `Cross-Origin-Opener-Policy` / `Cross-Origin-Embedder-Policy` 响应头，
 以兼容本地调试时浏览器的隔离策略要求。
 
+### 部署到 Vercel
+
+仓库已内置 `vercel.json`，**导入即部署，无需手动配置**。
+
+1. 打开 [vercel.com/new](https://vercel.com/new)，用 GitHub 账号登录
+2. 找到 `yemoRen/xiuxian` 仓库，点 **Import**
+   （若看不到，先在 GitHub 侧授权 Vercel 访问该仓库）
+3. 配置按下表填写，其余保持默认：
+
+   | 配置项 | 值 |
+   |---|---|
+   | Framework Preset | **Other** |
+   | Build & Output Settings → Build Command | **留空**（纯静态，无需构建） |
+   | Build & Output Settings → Output Directory | **`docs`** |
+   | Environment Variables | 无需配置 |
+
+   > `vercel.json` 里已声明 `outputDirectory: "docs"` 与 `framework: null`，
+   > 正常情况下 Vercel 会自动读取，表格中的值仅用于核对。
+
+4. 点 **Deploy**，约 1–2 分钟后即可获得 `https://xiuxian-xxx.vercel.app`
+
+之后每次 `git push` 到 `main` 分支，Vercel 会自动重新部署。
+
+`vercel.json` 做了三件事：
+
+- 指定输出目录为 `docs`
+- 为 `.wasm` / `.pck` 设置一年强缓存（文件名带哈希时安全；本游戏文件名固定，
+  若后续更新后遇到缓存问题，改一次文件名即可）
+- 追加 `Cross-Origin-Opener-Policy` / `Cross-Origin-Embedder-Policy` 响应头，
+  与本地开发服务器保持一致；当前无线程构建并不需要它们，
+  但保留可兼容日后切换到多线程构建
+
+> 也可以用 CLI 部署：`npx vercel --prod`（首次会引导登录并绑定项目）。
+
 ## 项目结构
 
 ```
@@ -106,6 +140,7 @@ xiuxian/
 ├── assets/                # 美术资源
 ├── build/serve.py         # 本地静态服务器
 ├── export_presets.cfg     # 导出预设
+├── vercel.json            # Vercel 部署配置
 └── project.godot
 ```
 
@@ -126,15 +161,33 @@ xiuxian/
 |---|---|---|
 | [v1.0.0](https://github.com/yemoRen/xiuxian/releases/tag/v1.0.0) | 2026-09-14 | 首个公开版本，Web 版发布 |
 
-## 说明
+## 关于原创与参考
 
-本项目是对手机游戏《论如何建立一个修仙门派》玩法的**个人学习与还原实现**，
-用于 Godot 引擎与游戏系统设计的学习交流。
+**玩法参考**：本作的门派经营玩法框架参考（致敬）了手机游戏《论如何建立一个修仙门派》，
+在此之上进行了大量原创拓展与重新设计。
 
-- 原作的玩法设计、数值体系与美术创意归原作者所有
-- 本项目代码为独立编写，未使用原作的任何素材或代码
-- 如原作者或相关权利人提出异议，请及时联系，我会立即下架
+**原创拓展**（部分）：
+
+- **七峰职务与加权效率模型** —— 峰主 100% / 副手 50% / 外门 20% / 杂役每人 +5%，
+  并区分"探索型"与"生产型"峰的效率属性
+- **杂役弟子编制管理** —— 独立人口池、按旬分配、全局 1200 / 单峰 200 双层上限
+- **产出门槛判定** —— 四座资源峰未达人员门槛时零产出，杜绝"空峰白嫖"
+- **事件物品品阶匹配** —— 弟子奇遇获得/失去的丹药、灵草、灵矿品阶与其境界挂钩，
+  不会出现"筑基弟子获得仙阶至宝"这类错位
+- **功德建筑体系** —— 12 座建筑跨轮回永久保留，构成长线成长曲线
+- **事件体系扩展** —— 事件扩充至 50+ 条，含 A/B 双分支与归因追踪
+- **法宝装备与秘境探索** —— 五槽位 / 十品阶装备，搭配寻幽峰秘境探索玩法
+
+**美术**：本作**未使用、也未参考**原作的任何美术素材。
+游戏内全部界面与图形均由 GDScript 程序化绘制（Canvas 矢量），
+项目中不存在任何图片素材；唯一使用的外部资源是开源像素字体
+[Fusion Pixel](https://github.com/TakWolf/fusion-pixel-font)（SIL Open Font License 1.1）。
+
+**代码**：全部为独立编写的 GDScript，未使用原作任何代码或数据文件。
+
+如原作者或相关权利人认为本项目有不妥之处，请通过
+[Issues](https://github.com/yemoRen/xiuxian/issues) 联系，我会第一时间处理。
 
 ---
 
-用 Godot 4 制作 · 开源学习项目
+用 Godot 4 制作 · 个人学习项目
