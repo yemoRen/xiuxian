@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="Yhtyk89H3H58sJSOnhdHv5"><head data-page-node-id="Z6G2EZRkt31iT6kYLfKdfx"><meta charset="utf-8" data-page-node-id="kiWY4DCHjHdaSkG6Iae5OY">
+<meta name="viewport" content="width=device-width,initial-scale=1" data-page-node-id="jmFSKUY1DtAZFxGyztlBtV">
+<title>事件扩展 A/B 归因报告</title>
+<style>
+ :root{--bg:#f6f7f9;--card:#fff;--line:#e4e7ec;--ink:#1c1f23;--ink2:#5b6472;--neg:#c92a2a;--pos:#1f7a45;}
+ *{box-sizing:border-box}
+ body{margin:0;padding:26px 18px 64px;background:var(--bg);color:var(--ink);
+      font:14px/1.7 "Segoe UI","Microsoft YaHei",system-ui,sans-serif}
+ .wrap{max-width:980px;margin:0 auto}
+ h1{font-size:21px;margin:0 0 6px}
+ .meta{color:var(--ink2);font-size:12.5px}
+ .kpi{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0 22px}
+ .kpi div{flex:1 1 150px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+ .kpi b{display:block;font-size:19px} .kpi span{font-size:12px;color:var(--ink2)}
+ section{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:18px}
+ h2{font-size:15.5px;margin:0 0 12px} h3{font-size:13.5px;margin:20px 0 6px;color:var(--ink2)}
+ table{width:100%;border-collapse:collapse}
+ th{text-align:left;font-size:12px;color:var(--ink2);border-bottom:2px solid var(--line);padding:7px 8px;white-space:nowrap}
+ td{border-bottom:1px solid var(--line);padding:8px;font-size:13px;vertical-align:middle}
+ td.num{text-align:right;white-space:nowrap}
+ td.arm{font-weight:600} td.arm em{display:block;font-style:normal;font-weight:400;font-size:11.5px;color:var(--ink2)}
+ tr.base{background:#f2f5fa} tr.cur{background:#fdf2f2}
+ tr.fix{background:#f2fbf5} tr.diag{background:#fafafa}
+ .neg{color:var(--neg);font-weight:600} .pos{color:var(--pos);font-weight:600}
+ .note{background:#eef4ff;border-left:3px solid #4b7bec;border-radius:0 8px 8px 0;padding:12px 14px;font-size:13.5px}
+ .warn{background:#fff6e5;border-left:3px solid #e8a33d;border-radius:0 8px 8px 0;padding:12px 14px;font-size:13.5px}
+ .spot{background:#fdf0f0;border-left:3px solid #c92a2a;border-radius:0 8px 8px 0;padding:12px 14px;font-size:13.5px}
+ .ok{background:#eefaf1;border-left:3px solid #1f7a45;border-radius:0 8px 8px 0;padding:12px 14px;font-size:13.5px}
+ code{background:#eef1f5;border-radius:4px;padding:1px 5px;font-size:12.5px}
+ ul{margin:8px 0 0 18px;padding:0} li{margin:5px 0}
+ p{margin:0 0 10px}
+ svg{display:block;width:100%;height:auto}
+ .scroll{max-height:340px;overflow:auto;border:1px solid var(--line);border-radius:8px}
+ footer{color:var(--ink2);font-size:12px;text-align:center;margin-top:22px}
+</style></head><body data-page-node-id="8dHhBTKvaKqqJ7emVesP4c"><div class="wrap" data-page-node-id="uef58BJc2a4hWVBVItwxbv">
+
+<h1 data-page-node-id="wvKHlaoAFc1znR9pJkaWkW">修仙门派 · 事件扩展 29→50 的 A/B 归因报告</h1>
+<div class="meta" data-page-node-id="0U5Xuqg3ryLZFq6z42AFbw">多随机种子长跑对照 ｜ 每局 4000 旬 ｜ 指标：飞升人数 ｜ 2026-09-12</div>
+
+<div class='ok' style='margin:0 0 18px' data-page-node-id="IsonOgiWJaOT0IhDA4Whd1"><b data-page-node-id="cihZizFwhDRIsYqv8TMFuQ">✅ 本报告的建议已采纳并落地（2026-09-12）。</b><br data-page-node-id="2Gy6Ffa0lav1lW9vrJHowK">已把 5 条「推进境界」老吉事件权重 ×1.5，总权重 205 → <b data-page-node-id="DWHJTlegxPblqC8XauHy46">216</b>；只动权重，文案与代码零改动。落地后长跑复验（400 种子）：线上池飞升均值 <b data-page-node-id="daGUljjfJEjYUJvrbxCMCE">4.03</b> vs 原池 <b data-page-node-id="2CzlJbNFrZYyREus3SCiKa">4.24</b>，差值 <b data-page-node-id="J8ZeiwifiNdIwUjHSQOR1E">-0.21</b>，<b data-page-node-id="eaDFetk7C4emojJgiFpply">p ≈ 0.0985（不显著）</b> —— 差距已收回到统计噪声内。<br data-page-node-id="PKLOL2gg8saazwhsUhMz4O">回归测试：EffTest 63/63 ｜ LogicTest 112/112 ｜ AlignmentTest 45/45 ｜ UISmoke 108/108。</div>
+
+<div class="kpi" data-page-node-id="BRkhwG1AGwWGVtvkHYuQWb">
+  <div data-page-node-id="0NJ61upe75XMsQYM3o79EF"><b data-page-node-id="DGr4cRKxffVOqgboftrJZo">4.24 → 3.79</b><span data-page-node-id="4fRWNns7GO3j6O2sDJwGeW">飞升均值（原池 → 线上池）</span></div>
+  <div data-page-node-id="70iFHr1kvLAMlc2HTGFmbr"><b class="neg" data-page-node-id="QsgCn6IgMPb0njiH6GmD9E">-10.7%</b><span data-page-node-id="wNIiFIKOu1g2aMVtRJ3Z45">线上池相对原池</span></div>
+  <div data-page-node-id="JGKzrAHf2kawAUwt5uM9mb"><b data-page-node-id="7YLPa6b3tGijBKbSOTrQJo">p ≈ 0.000</b><span data-page-node-id="DjNaH6Cn7zNcFbEFi61cmq">非常显著</span></div>
+  <div data-page-node-id="p8iYKs2xBi2yLbsmHWQ4to"><b data-page-node-id="UH5iuvpO4JoCVS5tAKKW6d">-0.45 次</b><span data-page-node-id="wPRVWhc6n25T2pfCp8Kjnd">绝对差值</span></div>
+  <div data-page-node-id="9R3rEXnSzp9zYXGxHzXZTT"><b data-page-node-id="Rz2bkJG1laQhVp1TA0yjWc">400 / 400</b><span data-page-node-id="h9AsL33iGqrPe2imMY8DCe">各自种子数</span></div>
+</div>
+
+<section data-page-node-id="7kMOMMQ2jJ8zsxHcWyCTIE">
+<h2 data-page-node-id="MdjRuKQd2WNfGsj9JVqmv3">结论</h2>
+<div class="warn" data-page-node-id="1Ggiblrnh1vpYjLjKwQcEH">结论：确有<b data-page-node-id="dRuwIzoFPWEnokubBTJvWN">统计非常显著</b>的下滑，但幅度只有约 10.7%——不是腰斩。<br data-page-node-id="QobwsfXd8o54gVvjg2yIHs">
+线上池（50 条）飞升均值 <b data-page-node-id="1GNQzun57Xvng8qPx2wE2I">3.79</b>，原池（29 条）<b data-page-node-id="wT3xmn0TvU9BoXsEJuNDBo">4.24</b>，
+差值 <b data-page-node-id="MLfuRgI0vQop3NPvLHUdbk">-10.7%</b>，Welch t = -3.66，<b data-page-node-id="TQ5sYYEAJEZBjvFCHyt9hz">p ≈ 0.000（非常显著）</b>。
+</div>
+<p style="margin-top:12px" data-page-node-id="FCyXw6efQMooHuXYtFhGOV">真正需要你关心的只有一件事：<b data-page-node-id="rQLrfsitX0PdYztthcrwmH">「7 → 4」这个数字是假的</b>。
+它是拿<b data-page-node-id="OgfQGQGv945QK4qeHvNj29">原池的一个幸运种子</b>去比<b data-page-node-id="1o5pvG5dQOPqOMmdlGJpOz">线上池的一个普通种子</b>。铺开到 400 个种子之后，
+真实差距只有零点几次飞升，而不是三次。</p>
+</section>
+
+<section data-page-node-id="CHWNGEEDKk41w6Tem5XFED">
+<h2 data-page-node-id="PRE6D9XgpBGbETeurgjjrQ">一、那次「7 → 4」是怎么来的</h2>
+<div class="spot" data-page-node-id="LCjlUcenVlPRZSIf4kv6Az"></div>
+<p style="color:var(--ink2);font-size:13px;margin:12px 0 0" data-page-node-id="7yzhc0kCGSoxV8SczAgBTz">
+下图里的 <b style="color:#c92a2a" data-page-node-id="Q2k1MqsVaDIE8q7hH99GBZ">▼</b> 就是种子 20260912 的落点：在原池里站在偏右上，
+在线上池里却只是中间。两个点各自乘以自己的分布，才有了那个吓人的结论。</p>
+</section>
+
+<section data-page-node-id="orXlznCy4DKujtGByPqyjw">
+<h2 data-page-node-id="rgbCx5A9SLv1tPVHR4dbML">二、全部实验臂对照</h2>
+<table data-page-node-id="rxpjpb8yJS3c6a3hIyMIhu">
+<thead data-page-node-id="IhcSKmxqeU7h5i4bUG8BUG"><tr data-page-node-id="qGFCaBn8w047f1fh4w2cQd"><th data-page-node-id="q6KjsK00arvDliuCRrweIR">变体</th><th data-page-node-id="ZDP9mIaFBmAGQ2DW9qEILM">样本</th><th data-page-node-id="jBurFFZoVFnEydyupZuSvg">飞升均值 ± 标准差</th><th data-page-node-id="YafzcxyGjDwGu086LBKwl2">范围</th><th data-page-node-id="NBEXMReiWVnv9Ofv8IS1BU">同批原池均值 / 样本</th><th data-page-node-id="EKHL9QCjN39bX2YGFIipAr">相对原池</th><th data-page-node-id="PXPZY4FeJMMkukBFm58gl2">显著性</th></tr></thead>
+<tbody data-page-node-id="J007ZzjdpFGAfrtWsn2iRD"><tr class='base' data-page-node-id="i03nQKUjH3Edq4GyitVHIg"><td class='arm' data-page-node-id="jpHM4YGf5Q1UWxwkTqe0OV">A · 原池 29 条<em data-page-node-id="NaHuI3nsPqK6qp6InjopeX">扩展前基准</em></td><td class='num' data-page-node-id="MRxxJGQ2bsjaXHFKupyL2T">400</td><td class='num' data-page-node-id="sMlJLgkkOFmbFLdTSzfzuV"><b data-page-node-id="lupEE4jEpvjS6KykfGIeQE">4.24</b> ± 1.81</td><td class='num' data-page-node-id="jyn9HNdNaQbvPGGPS4m4Zw">0 ~ 10</td><td class='num' data-page-node-id="IQb36rhEu03RjE2PvMg335">4.24<em style='font-weight:400;font-size:11px;color:#8a94a6' data-page-node-id="uYagDu0GaP18hciImKsh09"> /400</em></td><td class='num pos' data-page-node-id="p8LIhCZiWXrnO1u66LZzf4">+0.0%</td><td data-page-node-id="9h6vCeEaY46Hlm40PKyN9B">—</td></tr><tr class='diag' data-page-node-id="3RJUU28h3BknCE5sWKNhBp"><td class='arm' data-page-node-id="BUEVzXTzgGWeUlEI7gQGn5">B · 原池 ＋ 5 条新增「平常」<em data-page-node-id="lAKBgZLVhjUfwl6TbmLAkf">只隔离纯稀释</em></td><td class='num' data-page-node-id="lhWO43jjRkwoKOa6eiUoTX">300</td><td class='num' data-page-node-id="OU4u0IWXbQCIcGdGVyNYsP"><b data-page-node-id="kjhhez8IyEuXysyuiQH7RS">4.20</b> ± 1.74</td><td class='num' data-page-node-id="NRdNUPTGR7LXoy0hN7O1XE">0 ~ 10</td><td class='num' data-page-node-id="kHBLAukEsCsjzsCxct7UVn">4.33<em style='font-weight:400;font-size:11px;color:#8a94a6' data-page-node-id="F1jjZH6eBFdwL5lgyDZgVt"> /300</em></td><td class='num neg' data-page-node-id="syHDvI7AdqUCFpskv6BHKC">-3.0%</td><td data-page-node-id="9YCCJcKo8S6KzWYN7EbBVI">不显著（p≈0.364）</td></tr><tr class='diag' data-page-node-id="b4nC81WYlG7ethKk7xyZ2J"><td class='arm' data-page-node-id="w2uGyaPBgyohJznpqbvpH7">C · 原池 ＋ 16 条新增 eff<em data-page-node-id="Qc2H3inBJUTib2a5tc90gi">只隔离 eff 内容</em></td><td class='num' data-page-node-id="ML5SEBV9MWWpjuySJJrssI">300</td><td class='num' data-page-node-id="4xqcrLfwiT3IUvjQGDdBS1"><b data-page-node-id="JssAJoo5OUEWkc2QL4WdXj">4.41</b> ± 1.74</td><td class='num' data-page-node-id="RRSpKVDpmxzrXp3GS9kaTc">0 ~ 9</td><td class='num' data-page-node-id="RYBd6qS2NDHqP7B82kQOFd">4.33<em style='font-weight:400;font-size:11px;color:#8a94a6' data-page-node-id="Tfa7kOrgjGdC8Crt4kYZrq"> /300</em></td><td class='num pos' data-page-node-id="lb0CI6XKZHyxXNGXy4BK6S">+1.9%</td><td data-page-node-id="QdDPLDGob4H4rrWoFu4s1T">不显著（p≈0.561）</td></tr><tr class='cur' data-page-node-id="VrLwzAZv9wE1FbZmbqCw9g"><td class='arm' data-page-node-id="Pe40CCp9S5UHmOVOrZUTrz">D · 线上池（50 条）<em data-page-node-id="ag54WXCTCeB7sgZ4DlsWAy">线上真身</em></td><td class='num' data-page-node-id="p4D5KeNAhToFM5kDHK1vRw">400</td><td class='num' data-page-node-id="9CK5qK1FwcVBYJMHp8ey8y"><b data-page-node-id="84gJyaKGcUEjos6RDwrCk3">3.79</b> ± 1.68</td><td class='num' data-page-node-id="6gq9B1vF09G6ARRapBFJUc">0 ~ 9</td><td class='num' data-page-node-id="DqmnDGE2LXNucK4GvZLpHt">4.24<em style='font-weight:400;font-size:11px;color:#8a94a6' data-page-node-id="H2HUKHsMAmvdusPMEWPxpl"> /400</em></td><td class='num neg' data-page-node-id="2OGCDwKCBtgMdSQa3HcsHF">-10.7%</td><td data-page-node-id="RoP1vkoMcFO4cRFlOZEnQX">非常显著（p≈0.000）</td></tr><tr class='diag' data-page-node-id="Sv1CbNji3vm4fzDtlYCzad"><td class='arm' data-page-node-id="JbgpWOinFWLHCYQGazarQO">X · D 去掉新增的突破 −5%<em data-page-node-id="L8HXPGTpiLYTOKiGFECkTL">brk 假说排查</em></td><td class='num' data-page-node-id="KSxUQV1ZUWJqBkDzRVuOIC">300</td><td class='num' data-page-node-id="h2Hg5JhNUFMAyzWXybH0SO"><b data-page-node-id="sEUg0nE7XoJtP7VgU5lS9q">3.87</b> ± 1.72</td><td class='num' data-page-node-id="6hs538SDmYvowlDbK7EGZx">0 ~ 9</td><td class='num' data-page-node-id="6NmSBQCO7mqOkxSt6Aftzq">4.20<em style='font-weight:400;font-size:11px;color:#8a94a6' data-page-node-id="18yBM5qZHJ9mukI2aIzqhW"> /300</em></td><td class='num neg' data-page-node-id="IHk7Urpr4JoqRf7WIoCeGn">-7.9%</td><td data-page-node-id="oFFLCOyc0VdmWb4wyd6EMg">显著（p≈0.020）</td></tr><tr class='diag' data-page-node-id="e53guYbKGOaAyzgv8et7cn"><td class='arm' data-page-node-id="peQP0ZHpKUfEYjoYWhqlHJ">Y · D 补回突破 +5% 的权重<em data-page-node-id="YV8n5sJcNCVOpoWeZs7aXD">brk 假说排查</em></td><td class='num' data-page-node-id="cGKxbGcEPP66EcLerS6Fqj">300</td><td class='num' data-page-node-id="kmfag5HMg0xoyg4eOKDPyo"><b data-page-node-id="heCThGgSHzrdB7od6Is3t7">3.77</b> ± 1.84</td><td class='num' data-page-node-id="WJMRBSL8CWtPsVEp3jXUDY">0 ~ 10</td><td class='num' data-page-node-id="ACvUJBCyaDO082HvYqFBKC">4.20<em style='font-weight:400;font-size:11px;color:#8a94a6' data-page-node-id="Crg9bkw3axcOZUtOwRxWw5"> /300</em></td><td class='num neg' data-page-node-id="uMYHZrVNzMIEMbSmyRKO71">-10.2%</td><td data-page-node-id="ZRFFG5e0bFEA3QgbE6f2T2">非常显著（p≈0.004）</td></tr><tr class='diag' data-page-node-id="u57kQ49d6KYSQpiyC55Dhy"><td class='arm' data-page-node-id="i8e6RHOkXk1PaXT7lwgnmr">Z · X＋Y 同时做<em data-page-node-id="PvNV9sheDqQUGXnd3hqyaR">brk 假说排查</em></td><td class='num' data-page-node-id="lyJ9de1jbl35VJnIFVxTPS">300</td><td class='num' data-page-node-id="mPsin6qTKRTmB1N5v31Nnz"><b data-page-node-id="PEhG5SlgDdyHWs4Zj4TFTy">3.86</b> ± 1.77</td><td class='num' data-page-node-id="vmHWGO3TxZqzMOh5NNkcHO">0 ~ 9</td><td class='num' data-page-node-id="AEY8xi6E0b2o0h6yKbRlcz">4.20<em style='font-weight:400;font-size:11px;color:#8a94a6' data-page-node-id="vVtI36Ra0L4N3DArCOcMpR"> /300</em></td><td class='num neg' data-page-node-id="akKiqL5RHPA52AEcRaj1yJ">-8.2%</td><td data-page-node-id="EuM2RhspzJCkGUoDvCBmdK">显著（p≈0.018）</td></tr><tr class='fix' data-page-node-id="CGfpLWtkAEjNKkJGT4UGmj"><td class='arm' data-page-node-id="GVOibBQS7dGNsAaEzciAoZ">N · 新增 21 条权重减半<em data-page-node-id="Z8gPuHqBOshRUUkHJZK9TY">修复候选①：缩减分母</em></td><td class='num' data-page-node-id="d7JICqMvCArFL402a5PDyq">400</td><td class='num' data-page-node-id="tMDG45BkTYziyOtUUfhcE5"><b data-page-node-id="q07KSsbxNYWnFneDCCzUmz">3.60</b> ± 1.70</td><td class='num' data-page-node-id="gGgtcpdxzDVhd7AYi7YlcK">0 ~ 9</td><td class='num' data-page-node-id="y7cT0KTDm3fIpU21vt1FJe">4.24<em style='font-weight:400;font-size:11px;color:#8a94a6' data-page-node-id="Cec1oxYvqdDhvo9IzIhn52"> /400</em></td><td class='num neg' data-page-node-id="y9oz00XxhejxmRutR3wnEA">-15.0%</td><td data-page-node-id="oYQhqTD2XBPFbsMiK95Fo8">非常显著（p≈0.000）</td></tr><tr class='fix' data-page-node-id="LxtD60YjotmZYT8WACf8yD"><td class='arm' data-page-node-id="v8dsWTqolVJWLEC4dRmgfJ">P · 修炼类老吉事件权重 ×1.5<em data-page-node-id="pkWIgnQhHw9NscBpBBJO7y">修复候选②：补强分子</em></td><td class='num' data-page-node-id="Uqd4r8r4vxKeykCCsMsPFH">400</td><td class='num' data-page-node-id="YPD8BKzWQEskEqG5fk9wk2"><b data-page-node-id="HwD2yahMlKDNT8ZExUz9I4">4.03</b> ± 1.74</td><td class='num' data-page-node-id="OUcbAz3pxUajBoQY6pA36F">0 ~ 12</td><td class='num' data-page-node-id="7pPD0CrA1LOcJAGom8uieK">4.24<em style='font-weight:400;font-size:11px;color:#8a94a6' data-page-node-id="RRMnl2EspdKAgpPy9breyg"> /400</em></td><td class='num neg' data-page-node-id="DXbk7mDLgz4aLc8SNbFKqe">-4.9%</td><td data-page-node-id="xQMsL9T3HGnBQbCbVcWEf5">边缘、未达显著（p≈0.099）</td></tr><tr class='fix' data-page-node-id="hqHgihWHTaazWXy8OLDl8r"><td class='arm' data-page-node-id="7dbDKVaq1nFShn7EDWEUHm">P2 · 修炼类老吉事件权重 ×2.0<em data-page-node-id="D3SIb5leDzkx5NytbB4Scd">修复候选③：再加码</em></td><td class='num' data-page-node-id="RIB9AsFiZpBKLpVUGEdOuX">400</td><td class='num' data-page-node-id="jMAACkjOVY6CQs7Mtao8T2"><b data-page-node-id="agasJDoyEq63DeYtD6Fafv">4.46</b> ± 1.79</td><td class='num' data-page-node-id="5tGXf0r97PECgXM4GOEvkK">0 ~ 10</td><td class='num' data-page-node-id="JdFLUNErn45dIJe30aKJVw">4.24<em style='font-weight:400;font-size:11px;color:#8a94a6' data-page-node-id="MSDek8G3FZfSaNZ7ZnkX3B"> /400</em></td><td class='num pos' data-page-node-id="820UmjmlJsUfFc6jXJMp3o">+5.1%</td><td data-page-node-id="K8tmZKFru3OOwi1ZuUG5he">边缘、未达显著（p≈0.091）</td></tr></tbody>
+</table>
+<h3 data-page-node-id="Fq4ym7AVicJZAGRPBJ2Z8T">飞升次数分布</h3>
+<svg viewBox="0 0 660 118" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI,Microsoft YaHei,sans-serif" data-page-node-id="i2zFx0HnneC7KZQGUEBZDH">
+<line x1="150.0" y1="20" x2="150.0" y2="102" stroke="#eceff3" data-page-node-id="sALJAOIhidwUTqnK0ShzPG"/>
+<text x="170.5" y="114" font-size="10" fill="#8a94a6" text-anchor="middle" data-page-node-id="I3jL3tAzvDbDCfDCiqUj7h">0</text>
+<line x1="190.9" y1="20" x2="190.9" y2="102" stroke="#eceff3" data-page-node-id="A9oFyw282qtDSMHFhZZm1E"/>
+<text x="211.4" y="114" font-size="10" fill="#8a94a6" text-anchor="middle" data-page-node-id="QoeO6g2mL0jjvlHoZXdYVu">1</text>
+<line x1="231.8" y1="20" x2="231.8" y2="102" stroke="#eceff3" data-page-node-id="kATq4WSg6KDWAl0HVKe8Vg"/>
+<text x="252.3" y="114" font-size="10" fill="#8a94a6" text-anchor="middle" data-page-node-id="Z4uJPWgllCFjAD9bCHSiba">2</text>
+<line x1="272.7" y1="20" x2="272.7" y2="102" stroke="#eceff3" data-page-node-id="niD0BukNfRGQmlyPD1U5ZL"/>
+<text x="293.2" y="114" font-size="10" fill="#8a94a6" text-anchor="middle" data-page-node-id="2z7lmw8tRUHJFGHcK50HqH">3</text>
+<line x1="313.6" y1="20" x2="313.6" y2="102" stroke="#eceff3" data-page-node-id="qceta3Y4iN8HMaVe7kG3AD"/>
+<text x="334.1" y="114" font-size="10" fill="#8a94a6" text-anchor="middle" data-page-node-id="bhLjnZNkI0dUwZdNMcz4Cs">4</text>
+<line x1="354.5" y1="20" x2="354.5" y2="102" stroke="#eceff3" data-page-node-id="MemYqMqWgEelSx5WlgVsoX"/>
+<text x="375.0" y="114" font-size="10" fill="#8a94a6" text-anchor="middle" data-page-node-id="jgiSOx5aArzI2Afsv4iRqJ">5</text>
+<line x1="395.5" y1="20" x2="395.5" y2="102" stroke="#eceff3" data-page-node-id="Vg9TPG6mQ5tD1NFUf0SOt1"/>
+<text x="415.9" y="114" font-size="10" fill="#8a94a6" text-anchor="middle" data-page-node-id="WLDG02EeUUVAVh1swAGiH4">6</text>
+<line x1="436.4" y1="20" x2="436.4" y2="102" stroke="#eceff3" data-page-node-id="7fcEXmonE4gz4HWEAAFAhv"/>
+<text x="456.8" y="114" font-size="10" fill="#8a94a6" text-anchor="middle" data-page-node-id="zLW3NS72gyobrHN4TKDXOn">7</text>
+<line x1="477.3" y1="20" x2="477.3" y2="102" stroke="#eceff3" data-page-node-id="moJ9wH2XNqSp9I7ibBwjFZ"/>
+<text x="497.7" y="114" font-size="10" fill="#8a94a6" text-anchor="middle" data-page-node-id="oSVYU8HGsonpGmM2wvD86B">8</text>
+<line x1="518.2" y1="20" x2="518.2" y2="102" stroke="#eceff3" data-page-node-id="041s4SbwolbL3IproTkaw8"/>
+<text x="538.6" y="114" font-size="10" fill="#8a94a6" text-anchor="middle" data-page-node-id="Og7ROWwnewfkT44aAjRut5">9</text>
+<line x1="559.1" y1="20" x2="559.1" y2="102" stroke="#eceff3" data-page-node-id="9E4GyI76xFT7sAdim5vUYu"/>
+<text x="579.5" y="114" font-size="10" fill="#8a94a6" text-anchor="middle" data-page-node-id="E8umEFqrJnUODOL7q0m89S">10</text>
+<line x1="600.0" y1="20" x2="600.0" y2="102" stroke="#eceff3" data-page-node-id="WNVKYBIhRDLJPzT2xSYmnv"/>
+<text x="150" y="12" font-size="11" fill="#5b6472" data-page-node-id="yeNEX0QzkN006Le2mwxwXA">飞升次数分布（柱上＝种子数；▼＝种子 20260912 的位置）</text>
+<text x="6" y="37" font-size="11.5" fill="#1c1f23" data-page-node-id="hNBE4rexTEE6PhpaLBxjpM">A_old29</text>
+<rect x="151.5" y="36.4" width="37.9" height="6.6" rx="2" fill="#4b7bec" opacity="0.82" data-page-node-id="HWn3skQeq1W5J7ArxE4jUY"/>
+<text x="170.5" y="33.4" font-size="9" fill="#3b5bdb" text-anchor="middle" data-page-node-id="oaOSxuQuHXaFKFML4ddE0F">3</text>
+<rect x="192.4" y="33.4" width="37.9" height="9.6" rx="2" fill="#4b7bec" opacity="0.82" data-page-node-id="YjWK6xaC2y5BnDonfcOniX"/>
+<text x="211.4" y="30.4" font-size="9" fill="#3b5bdb" text-anchor="middle" data-page-node-id="vG47Ev6Az5CIOTPVHk76ST">19</text>
+<rect x="233.3" y="28.4" width="37.9" height="14.6" rx="2" fill="#4b7bec" opacity="0.82" data-page-node-id="cI6srOpMcRuKuqyYgrtsa1"/>
+<text x="252.3" y="25.4" font-size="9" fill="#3b5bdb" text-anchor="middle" data-page-node-id="4JvrCFDdy1DNHGbPSGbSsf">45</text>
+<rect x="274.2" y="21.6" width="37.9" height="21.4" rx="2" fill="#4b7bec" opacity="0.82" data-page-node-id="L4MNI74G5nbJsh35XXEG3I"/>
+<text x="293.2" y="18.6" font-size="9" fill="#3b5bdb" text-anchor="middle" data-page-node-id="wikqtvxkUvqPV76GhknE5k">81</text>
+<rect x="315.1" y="21.6" width="37.9" height="21.4" rx="2" fill="#4b7bec" opacity="0.82" data-page-node-id="VbCDmZnk2y5EQq2RUiZyOT"/>
+<text x="334.1" y="18.6" font-size="9" fill="#3b5bdb" text-anchor="middle" data-page-node-id="W9FFGwGlBnRZVCnsxnO4LA">81</text>
+<rect x="356.0" y="23.3" width="37.9" height="19.7" rx="2" fill="#4b7bec" opacity="0.82" data-page-node-id="YTbA6mQHxe3qIsbpXtkYQl"/>
+<text x="375.0" y="20.3" font-size="9" fill="#3b5bdb" text-anchor="middle" data-page-node-id="n6sK09REmxCFNwRqsoc8Qd">72</text>
+<rect x="397.0" y="27.3" width="37.9" height="15.7" rx="2" fill="#4b7bec" opacity="0.82" data-page-node-id="SWpim1jCaiTLVIccHcslOA"/>
+<text x="415.9" y="24.3" font-size="9" fill="#3b5bdb" text-anchor="middle" data-page-node-id="DO2qofEFD9SmGUIlrwwiCK">51</text>
+<rect x="437.9" y="30.0" width="37.9" height="13.0" rx="2" fill="#4b7bec" opacity="0.82" data-page-node-id="sGWDrgtYrzcGFDXx0UqgHr"/>
+<text x="456.8" y="27.0" font-size="9" fill="#3b5bdb" text-anchor="middle" data-page-node-id="bve0q5ErGQuywtbeelBplw">37</text>
+<rect x="478.8" y="35.9" width="37.9" height="7.1" rx="2" fill="#4b7bec" opacity="0.82" data-page-node-id="pc78DhSJF427BxlFF58VfG"/>
+<text x="497.7" y="32.9" font-size="9" fill="#3b5bdb" text-anchor="middle" data-page-node-id="8JnFJc5lKJEGO2sxpWpswP">6</text>
+<rect x="519.7" y="36.4" width="37.9" height="6.6" rx="2" fill="#4b7bec" opacity="0.82" data-page-node-id="aeY8FOZ29vAmByC5YoGNCb"/>
+<text x="538.6" y="33.4" font-size="9" fill="#3b5bdb" text-anchor="middle" data-page-node-id="Au2aR6igLNxI7N9XmMFAa8">3</text>
+<rect x="560.6" y="36.6" width="37.9" height="6.4" rx="2" fill="#4b7bec" opacity="0.82" data-page-node-id="NprzBGPgl8rH5u7kTfbmYI"/>
+<text x="579.5" y="33.6" font-size="9" fill="#3b5bdb" text-anchor="middle" data-page-node-id="Tct5rqVjdEVpocGPE5fKO4">2</text>
+<text x="604.0" y="31" font-size="10" fill="#8a94a6" data-page-node-id="vP0iA7ur2lwd0gfjaLaKWz">均值</text>
+<text x="604.0" y="45" font-size="13" font-weight="700" fill="#c92a2a" data-page-node-id="VSwAdcgZoDQuadofwknTSZ">4.24</text>
+<text x="6" y="75" font-size="11.5" fill="#1c1f23" data-page-node-id="l4HiBN01oULKvYMw4mAHby">D_new50</text>
+<rect x="151.5" y="72.7" width="37.9" height="8.3" rx="2" fill="#c92a2a" opacity="0.82" data-page-node-id="nQqO6uocNvEmcYHAjOd7fU"/>
+<text x="170.5" y="69.7" font-size="9" fill="#3b5bdb" text-anchor="middle" data-page-node-id="uPW7lXnHCKer5fkxFE5zEc">12</text>
+<rect x="192.4" y="71.6" width="37.9" height="9.4" rx="2" fill="#c92a2a" opacity="0.82" data-page-node-id="cquDk9BskKwUrcUec3FN16"/>
+<text x="211.4" y="68.6" font-size="9" fill="#3b5bdb" text-anchor="middle" data-page-node-id="NAN9j7JIsWCAtt5up87CCx">18</text>
+<rect x="233.3" y="63.0" width="37.9" height="18.0" rx="2" fill="#c92a2a" opacity="0.82" data-page-node-id="wag6h5IDY9TpeH5QEZuY9h"/>
+<text x="252.3" y="60.0" font-size="9" fill="#3b5bdb" text-anchor="middle" data-page-node-id="kGsfmFBAlokJjuv2Ljy3Mx">63</text>
+<rect x="274.2" y="59.0" width="37.9" height="22.0" rx="2" fill="#c92a2a" opacity="0.82" data-page-node-id="ZRt7hQtOAV4QbHiyFgVHSb"/>
+<text x="293.2" y="56.0" font-size="9" fill="#3b5bdb" text-anchor="middle" data-page-node-id="z1QSyUNHb9NXAtCCXxHHB6">84</text>
+<rect x="315.1" y="59.2" width="37.9" height="21.8" rx="2" fill="#c92a2a" opacity="0.82" data-page-node-id="zSi2QUVHgln8mjh4ERgEGK"/>
+<text x="334.1" y="56.2" font-size="9" fill="#3b5bdb" text-anchor="middle" data-page-node-id="U4jTAUW3J4BmRegY1Wwo26">83</text>
+<rect x="356.0" y="60.0" width="37.9" height="21.0" rx="2" fill="#c92a2a" opacity="0.82" data-page-node-id="sg9fzSHPddZoaO5BEeSZSI"/>
+<text x="375.0" y="57.0" font-size="9" fill="#3b5bdb" text-anchor="middle" data-page-node-id="yvpsk3Kciyot7c62EcYkfG">79</text>
+<rect x="397.0" y="67.6" width="37.9" height="13.4" rx="2" fill="#c92a2a" opacity="0.82" data-page-node-id="R8Tzoh9W7N7r8qRwUQExYW"/>
+<text x="415.9" y="64.6" font-size="9" fill="#3b5bdb" text-anchor="middle" data-page-node-id="m9FYZVEuzVo9w8BZb68RrF">39</text>
+<rect x="437.9" y="71.4" width="37.9" height="9.6" rx="2" fill="#c92a2a" opacity="0.82" data-page-node-id="oUFxKUdjCYHMkIyf51GuaQ"/>
+<text x="456.8" y="68.4" font-size="9" fill="#3b5bdb" text-anchor="middle" data-page-node-id="ldwp6A2jeCBvfPsttVUZE7">19</text>
+<rect x="478.8" y="74.6" width="37.9" height="6.4" rx="2" fill="#c92a2a" opacity="0.82" data-page-node-id="WisIo1TGSdcsbeV1VJlH4A"/>
+<text x="497.7" y="71.6" font-size="9" fill="#3b5bdb" text-anchor="middle" data-page-node-id="t2kq3dVzRLpdN1suTZpcSl">2</text>
+<rect x="519.7" y="74.8" width="37.9" height="6.2" rx="2" fill="#c92a2a" opacity="0.82" data-page-node-id="RPfCE6LhjRuV1pHzeFEgsX"/>
+<text x="538.6" y="71.8" font-size="9" fill="#3b5bdb" text-anchor="middle" data-page-node-id="tzIhwu3FT6akFUWnjJEmD6">1</text>
+<text x="604.0" y="69" font-size="10" fill="#8a94a6" data-page-node-id="BDFNPG5hrow2PO6qpvlsjc">均值</text>
+<text x="604.0" y="83" font-size="13" font-weight="700" fill="#c92a2a" data-page-node-id="x59103sV5lf4hWBcQlHBAm">3.79</text>
+</svg>
+<h3 data-page-node-id="icBvumzy0Kw1GEbatbQIeB">相对原池的变化幅度</h3>
+<svg viewBox="0 0 660 264" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI,Microsoft YaHei,sans-serif" data-page-node-id="3XQnkUHAYEPXd9C66eQm83">
+<line x1="437.0" y1="2" x2="437.0" y2="262" stroke="#c9ced6" data-page-node-id="jM7ZY0hnjoQCrrwJyDAfJu"/>
+<text x="6" y="18" font-size="11" fill="#1c1f23" data-page-node-id="o2RlP6FTupn9QrgSPXILs7">B_neu34</text>
+<rect x="409.6" y="5" width="27.4" height="15" rx="3" fill="#c92a2a" opacity="0.85" data-page-node-id="WHEDQm6V0qnFXqSTq5fj45"/>
+<text x="403.6" y="18" font-size="10.5" fill="#c92a2a" text-anchor="end" data-page-node-id="Y4NnFzgIjcvF3Cv4LQGzSR">-3.0%（p≈0.364）</text>
+<text x="6" y="46" font-size="11" fill="#1c1f23" data-page-node-id="CB4iQ7FolEfSBC9t5KdizW">C_eff45</text>
+<rect x="437.0" y="33" width="17.5" height="15" rx="3" fill="#1f7a45" opacity="0.85" data-page-node-id="2bRMBTucVDIOe9U42fCyHv"/>
+<text x="460.5" y="46" font-size="10.5" fill="#1f7a45" data-page-node-id="tfUOxpBaLQBB4ljP0lCtdP">+1.9%（p≈0.561）</text>
+<text x="6" y="74" font-size="11" fill="#1c1f23" data-page-node-id="bdU3cVzLcmDcMSY05J0VUY">D_new50</text>
+<rect x="339.8" y="61" width="97.2" height="15" rx="3" fill="#c92a2a" opacity="0.85" data-page-node-id="zNBL7vbK5kAikQLpzy9MyO"/>
+<text x="333.8" y="74" font-size="10.5" fill="#c92a2a" text-anchor="end" data-page-node-id="Xny6t88UmzHDZzAkmdMYnO">-10.7%（p≈0.000）</text>
+<text x="6" y="102" font-size="11" fill="#1c1f23" data-page-node-id="FVNsFaXsGtlJjD4YY92TUp">X_noBrk5</text>
+<rect x="364.7" y="89" width="72.3" height="15" rx="3" fill="#c92a2a" opacity="0.85" data-page-node-id="3LbFa3ExpzAmEz9d0MkqMR"/>
+<text x="358.7" y="102" font-size="10.5" fill="#c92a2a" text-anchor="end" data-page-node-id="11ho8005eDzVKwy1qMYrZA">-7.9%（p≈0.020）</text>
+<text x="6" y="130" font-size="11" fill="#1c1f23" data-page-node-id="5BtQwiWyXmBF1o15uJBYOa">Y_brkBoost</text>
+<rect x="343.8" y="117" width="93.2" height="15" rx="3" fill="#c92a2a" opacity="0.85" data-page-node-id="XMKj80q67dDxwqnulphsvX"/>
+<text x="337.8" y="130" font-size="10.5" fill="#c92a2a" text-anchor="end" data-page-node-id="oF3eIvkM6Fskn8uKACSFf8">-10.2%（p≈0.004）</text>
+<text x="6" y="158" font-size="11" fill="#1c1f23" data-page-node-id="WjeUEt69qYVWw4ih9VojvL">Z_brkBoth</text>
+<rect x="362.6" y="145" width="74.4" height="15" rx="3" fill="#c92a2a" opacity="0.85" data-page-node-id="DaNSiarQb0OqoCUkY1AN8B"/>
+<text x="356.6" y="158" font-size="10.5" fill="#c92a2a" text-anchor="end" data-page-node-id="KcH5lL8bx6oycvhKhaOb5s">-8.2%（p≈0.018）</text>
+<text x="6" y="186" font-size="11" fill="#1c1f23" data-page-node-id="FHYTSVzORPls5k99aKpp6Y">N_halfNew</text>
+<rect x="300.0" y="173" width="137.0" height="15" rx="3" fill="#c92a2a" opacity="0.85" data-page-node-id="PuOz1sv6bDDiG7RL79gwKP"/>
+<text x="294.0" y="186" font-size="10.5" fill="#c92a2a" text-anchor="end" data-page-node-id="fHdpuEJ0717IEoRaNTfWTU">-15.0%（p≈0.000）</text>
+<text x="6" y="214" font-size="11" fill="#1c1f23" data-page-node-id="PZtOk33MQ1ek5W34DJDB99">P_boostCult</text>
+<rect x="392.4" y="201" width="44.6" height="15" rx="3" fill="#c92a2a" opacity="0.85" data-page-node-id="KTA8CaAmpHE2l4RC7IKN8b"/>
+<text x="386.4" y="214" font-size="10.5" fill="#c92a2a" text-anchor="end" data-page-node-id="yAXzCBeCKG9u1u18Oy4Myd">-4.9%（p≈0.099）</text>
+<text x="6" y="242" font-size="11" fill="#1c1f23" data-page-node-id="ierDeZWh5rTlleWpAUMeen">P2_boostCult2</text>
+<rect x="437.0" y="229" width="46.2" height="15" rx="3" fill="#1f7a45" opacity="0.85" data-page-node-id="LKfM6LsZ0UvUh8cDYQeluB"/>
+<text x="489.2" y="242" font-size="10.5" fill="#1f7a45" data-page-node-id="05p3ysyIk8HFFc1CmyO0Dr">+5.1%（p≈0.091）</text>
+</svg>
+</section>
+
+<section data-page-node-id="SV12pZSDYzeYkeqe9CLTL1">
+<h2 data-page-node-id="A5KjCLBDgVZAD6cyHS0xKo">三、机制排查（含一条被证伪的线索）</h2>
+<p data-page-node-id="G5sUVmNJ0JsA1YDwT9Q7h3">把 21 条新增拆成两个可以独立施加的子集：<b data-page-node-id="EFJyf3gN9ZZFCGH7weaaBU">B</b>（只加 5 条「平常」，纯稀释）-3.0%（p≈0.364，不显著）、<b data-page-node-id="DvjqWqNIklLMzbW1KMbAyJ">C</b>（只加 16 条 eff）+1.9%（p≈0.561，不显著）；但两者<b data-page-node-id="9pAqS9WjRoX3UQ4NvEsda9">合在一起</b>的 D 却是 -10.7%（p≈0.000，显著）。单独加任意一半都测不出问题，只有全加上才出现 —— 这是典型的<b data-page-node-id="vOHupXMz55Gp6bEzHEy7vf">协同/交互</b>，说明<b data-page-node-id="8j2sbPls0Zak3NNwHydLjT">不存在某一条「坏事件」，而是「事件池变大」与「新增内容取向」叠加后的整体效应</b>。</p>
+<h3 data-page-node-id="SMWuJNqmRQYS2LHuDCFtj0">权重稀释：这是确实存在的结构性变化</h3>
+<p data-page-node-id="bEXrvTayNBLEGm3BE3SH7w">事件触发率固定为每旬 28%，所以每局的事件<b data-page-node-id="awytwWB1VK6KBZoxiVqvl6">条数不变</b>，变的只是「抽到哪一类」。
+新增 21 条全部抬高了分母（总权重 114 → 205），把推进境界的吉事件挤淡了：</p>
+<table data-page-node-id="GiU2O831JuwyIV27ofm0Mg">
+<thead data-page-node-id="P15l82FluEFnjpJ9lblJFp"><tr data-page-node-id="8ADsv3tCgfOKfgyW1n2tW8"><th data-page-node-id="E2RCcaDWbc3eMkQbGbrAqS">事件池</th><th data-page-node-id="dksK5tKWIgMPzcLcWNS84g">总权重</th><th data-page-node-id="T9jPvmsfMSYB7MoDRXojZg">吉事件权重</th><th data-page-node-id="o7GQNDQhnM1RI1BdxB9ItQ">其中「推进境界」</th><th data-page-node-id="UMSIuyQBntCsxP6bZzAAK3">占吉事件</th><th data-page-node-id="OCeNsXxWFG5pJ6HxuLKJk1">占全部事件</th></tr></thead>
+<tbody data-page-node-id="B0caGxVAPEymW7L3TIGaVE">
+<tr data-page-node-id="sY48P5OluQrdU73Ziv2PIV"><td data-page-node-id="3oUJdacvItHLXDnFXwlYkM">旧池 29 条</td><td class="num" data-page-node-id="xbJjgpissiDaW58ac0pbCE">125</td><td class="num" data-page-node-id="lbMBJ3VGott0kvdXvRKEhT">55</td>
+<td class="num" data-page-node-id="pUW3QMjiETnZwxic2J2huJ">32</td><td class="num" data-page-node-id="U9V0k7exR2zGkn7O3TLxQR">58.2%</td><td class="num" data-page-node-id="mHPlaCdLa0pivOuQuIYvQI">25.6%</td></tr>
+<tr data-page-node-id="BbxRvn6mUK3kbCBdPzfZDr"><td data-page-node-id="IJRjfCojsBMsrxXqrIdB73">新池 50 条</td><td class="num" data-page-node-id="JQrjibcPVt2TGcns0bU2pH">216</td><td class="num" data-page-node-id="IlDfChxgqr8daHdSyCmyVO">86</td>
+<td class="num" data-page-node-id="B2zBDlAeFgsDGwQeLAJcj7">35</td><td class="num" data-page-node-id="bCPuFBxjcQsCXlhd5SQ6Au">40.7%</td><td class="num" data-page-node-id="h3FoMCEN55XLY0U0D5Hg5q">16.2%</td></tr>
+</tbody></table>
+<p style="margin-top:10px" data-page-node-id="igT2HmtBp30mMwDqKtxlYW">「推进境界」= 效果含 <code data-page-node-id="Ry0V0dFLHEXQn47JC0n9hj">灵气回复率</code> / <code data-page-node-id="84Ty2XVxPprBFKtIw0iFOt">当前修为</code> / <code data-page-node-id="2E5Di3i4YTDzaqfjKyMbWS">突破加成</code> 的事件。
+密度 <b data-page-node-id="4Mpzuq3RaMhGo78a9IDZGe">25.6% → 16.2%</b>（相对降 -37%）。
+另外新吉事件里只有 1 条（权重 3）给修炼速度，其余给的是丹药 / 灵草 / 矿石 / 法宝 / 心情 ——
+这些材料要经炼丹、炼器、突破才能转成境界，转化链更长。</p>
+
+<h3 data-page-node-id="RB5AHMGBCphe8zZ5oDIEfY">一条被证伪的线索：突破加成（brk）</h3>
+<p data-page-node-id="3lWyHZVbSFuNvpDgBYXeQf">时间序列上确实有一段很扎眼的信号：<b data-page-node-id="UD6D86ipA1RCdmwNiTHnC0">brk（突破加成）在 16/16 个检查点全部为负</b>（随机波动出现这种连号的概率约为 2e-05）——乍看就是元凶。<br data-page-node-id="ZEZCkaPlvk7POzOfN5V2bm">于是做了三个定向诊断臂去改它：「D 去掉新增的突破 −5%」-7.9%（p≈0.020）　「D 补回突破 +5% 的权重」-10.2%（p≈0.004）　「X＋Y 同时做」-8.2%（p≈0.018）　<br data-page-node-id="gkloQYVwezYR2OagFJ7isK"><b data-page-node-id="U4TDyhqcNGWWPVU5xOxtXv">结果是三个臂全都没能恢复，全部仍然显著低于原池 —— brk 假说被证伪。</b>brk 的持续偏低只是<b data-page-node-id="NzASTulsdeTdElLi4xOByD">伴随现象</b>，不是飞升减少的原因。这条排查记录保留在这里，因为它正好说明「相关≠因果」。</p>
+<div class="scroll" data-page-node-id="CQ8OT9vsgCSqahoGRrFoVf"><table data-page-node-id="GJNQJjMm2ayP4qeub0dtBf"><thead data-page-node-id="7UTrD4NF2Fvi7DR8bYBmIw"><tr data-page-node-id="5AlNFz8zDG0ez3Gbb8w2El"><th data-page-node-id="1IqOuwAL6yZRL5kYup8hEX">旬</th><th data-page-node-id="U0mKJMWLzJM6batnSusUl7">年</th><th data-page-node-id="c2nBq7KnYGKy1lltt15ag7">brk 差</th><th data-page-node-id="X3kXnG8ZFDEB1xK5gK5f4g">心情差</th><th data-page-node-id="Ci5KNbCQGvpDRNQZDj8A6w">修为占比差</th><th data-page-node-id="9QUQFPic9dvGnT0LUKBA0X"></th></tr></thead><tbody data-page-node-id="MNlRoJdH5fL3IklymvAfXv"><tr data-page-node-id="QiR1Pm1Nh4rPHHEADRxxPX"><td class='num' data-page-node-id="P7NG6OXZr4p6UokQHYaUIi">250</td><td class='num' data-page-node-id="Hsw1X0IMzOsCEX3nBBxYuD">7</td><td class='num' data-page-node-id="ScUXErclcoz73EGx48oLzK">-0.012</td><td class='num' data-page-node-id="7XY48LHpTSUKQWc5AUWQ5B">-0.93</td><td class='num' data-page-node-id="DIGO6ikzFlg5MFme1SbSOL">-0.024</td><td class='num neg' data-page-node-id="UvllYlS85Q9SAes8kosv63">↓</td></tr><tr data-page-node-id="mTljTZGaVH3CLW8IDPHqYW"><td class='num' data-page-node-id="COGKk3w8fRYFa5H92iVjrF">500</td><td class='num' data-page-node-id="L8yIk4FEfE0PAZ3pxhTYiH">14</td><td class='num' data-page-node-id="d3RWqZzvGaa0qhBhDrSvbz">-0.017</td><td class='num' data-page-node-id="YbAuGsCec391rVALirBMAA">+1.02</td><td class='num' data-page-node-id="i0UHPDViJXEfPowOFAp03a">-0.009</td><td class='num neg' data-page-node-id="WJdsdSlrsIzMKH2WBxyyeF">↓</td></tr><tr data-page-node-id="ndXUDgaRRWjNR1uTKrjjSD"><td class='num' data-page-node-id="RYDfdIp2znegNrAybUgHd0">750</td><td class='num' data-page-node-id="JzVNAiBacLyngiIN6FU75E">21</td><td class='num' data-page-node-id="PWJQaPGAG7J8KFHNDOs0qM">-0.017</td><td class='num' data-page-node-id="nqnVNBuYrCUb4ujvMFZkXd">+4.55</td><td class='num' data-page-node-id="ixF02CWbBGcq6inmUvhW8Q">-0.023</td><td class='num neg' data-page-node-id="kMWDc5pFDPSraYfYS16Buc">↓</td></tr><tr data-page-node-id="rHPmPEw4Gi6SM9TFhFFlgD"><td class='num' data-page-node-id="p2EQiXTJrrDTcWUNqzy2cx">1000</td><td class='num' data-page-node-id="jAdUOvlnNony0HiIYBdcCB">28</td><td class='num' data-page-node-id="10ajCeWwMGxH2ceiNtyZRl">-0.018</td><td class='num' data-page-node-id="RkO5XX7v89vG89eZ2viEO5">+1.64</td><td class='num' data-page-node-id="yYzCU0VnGUwLzBNloK3xIG">+0.034</td><td class='num neg' data-page-node-id="lME9PCpfAwvejGo7YU10rT">↓</td></tr><tr data-page-node-id="Aw9I8JpC47sgZfInmdUyfB"><td class='num' data-page-node-id="R3nsLnByqQrOjuAiifEw2L">1250</td><td class='num' data-page-node-id="1U0FhDmYsIMBwPUfMC0p4v">35</td><td class='num' data-page-node-id="iHUebdJjjV4LBJA1lSAqDl">-0.009</td><td class='num' data-page-node-id="ntMJdYeFr82ne13oQSwmMa">+0.97</td><td class='num' data-page-node-id="8YZx64TKmw6wHxw7CLlRnd">-0.015</td><td class='num neg' data-page-node-id="Yafb8tBsksAhl8BUoXZ2Rl">↓</td></tr><tr data-page-node-id="4qQnm8aDicb1TtrndHi55i"><td class='num' data-page-node-id="eYW5iLkx2HFETEv3sWeG5J">1500</td><td class='num' data-page-node-id="EFSLJ12JlEDeKO01d5krrm">42</td><td class='num' data-page-node-id="Vn6XwGM3zYLwOxo6MJHNu9">-0.007</td><td class='num' data-page-node-id="VICy4l7A4dz9ynxjzF8Cwm">+0.59</td><td class='num' data-page-node-id="zqp64bidWnkUwwF2CnljtC">-0.012</td><td class='num neg' data-page-node-id="nIuJcAxarFsZaUOwYT5PG1">↓</td></tr><tr data-page-node-id="2UYHZiqGW8qrpWpqtx76Xr"><td class='num' data-page-node-id="mArPf5uKQAhIqmxdOF7MxB">1750</td><td class='num' data-page-node-id="ClOUGSIzwOjPBtE8eX81k9">49</td><td class='num' data-page-node-id="twHQt3sRdeDfW4hhxiXw1j">-0.015</td><td class='num' data-page-node-id="PV25FkEJAmk61SSkIEQR3z">-0.01</td><td class='num' data-page-node-id="79FT4DC9qAyyClGwASkAA3">+0.026</td><td class='num neg' data-page-node-id="6UwvmCwIHkEAoDZGtb0EKa">↓</td></tr><tr data-page-node-id="sGDdgDiM4OQrOAiE2yBux2"><td class='num' data-page-node-id="ibWFSVeRPbibAohpZpRLmf">2000</td><td class='num' data-page-node-id="VVXAHG6WNrMScLHjkzVLgQ">56</td><td class='num' data-page-node-id="YHjjDeHFEEMBTuHgqpLVDX">-0.016</td><td class='num' data-page-node-id="VuuJrOJNWHeGQISVL0RCDm">-1.53</td><td class='num' data-page-node-id="riAhDZRYo3lFObjXgawI1Z">-0.013</td><td class='num neg' data-page-node-id="EMfO8kv6akq5rgfKxQDqUP">↓</td></tr><tr data-page-node-id="HYT9eUSLedcstpZQOigyBv"><td class='num' data-page-node-id="RtEKv3VfNtzoYK9gp2LzbH">2250</td><td class='num' data-page-node-id="wTAcQHsgqiB6yjqAcxoNum">63</td><td class='num' data-page-node-id="voD0zXiLHCnvuE2tPpYjhJ">-0.022</td><td class='num' data-page-node-id="BhhZtvrpHJraiuEbnhBTOF">-4.07</td><td class='num' data-page-node-id="tUTMD7vz8woK0OIfAWM2kJ">+0.014</td><td class='num neg' data-page-node-id="bzVsES60PNHKFzaNVEQHll">↓</td></tr><tr data-page-node-id="cORraVP1AElQp3T9bh0m3m"><td class='num' data-page-node-id="MSHFF2PK3W8TDMA7TTw9c9">2500</td><td class='num' data-page-node-id="cEr1dw4qMFV3jHSUJafhdw">70</td><td class='num' data-page-node-id="VR1GXTNI3Z0I2P0gHo4YDi">-0.013</td><td class='num' data-page-node-id="oBixX9jYL2LA8jDwPn0dbf">-1.68</td><td class='num' data-page-node-id="4EARklBv0ttJ2lSEG5Fa5d">+0.006</td><td class='num neg' data-page-node-id="buyqTPkR6KA0DQbUayekgA">↓</td></tr><tr data-page-node-id="LYEopFr62K3ZOTUOL5uVAr"><td class='num' data-page-node-id="H7cLpRQ8snGFMONVxaAk0m">2750</td><td class='num' data-page-node-id="ZquAuqaDJj2ZRhdCECyTDz">77</td><td class='num' data-page-node-id="8ebgnGVyWwp1YqfabVOxAA">-0.020</td><td class='num' data-page-node-id="IevSR5wez7cwbzNmLCFDw0">+1.26</td><td class='num' data-page-node-id="n3suPoYxpa2JBaYKsxdSPC">-0.040</td><td class='num neg' data-page-node-id="VhS5yrOIi18oEHBhlEoVHc">↓</td></tr><tr data-page-node-id="kRCWF0qgW4lSm1kMc6QV60"><td class='num' data-page-node-id="nfAy5EnFxUdQ5YRmdmtsd8">3000</td><td class='num' data-page-node-id="G1CzHUredFuCNPhEC1Zf8Y">84</td><td class='num' data-page-node-id="wJrv8Fxak0ktdJU7tXBf4G">-0.027</td><td class='num' data-page-node-id="MRncGvwwi3ChOvR1FlxuU8">+0.94</td><td class='num' data-page-node-id="iHfedy7Ijm6E0XOOzipINl">-0.013</td><td class='num neg' data-page-node-id="OBiBUkwahapYMSSEw4aH8W">↓</td></tr><tr data-page-node-id="uRGwL1Jqy0NdoHPxaQMfNY"><td class='num' data-page-node-id="7kz1LboihmptcgDG3NCfOg">3250</td><td class='num' data-page-node-id="xsfvgUg8LGT70Lrq9dXoIG">91</td><td class='num' data-page-node-id="ncRd0nAHSZ9jKGFnDIcepm">-0.033</td><td class='num' data-page-node-id="HC3L330K02uI8hfsZ86Ndk">-0.03</td><td class='num' data-page-node-id="hIBtKTVFqyg2ldMsxTS969">-0.002</td><td class='num neg' data-page-node-id="ijhZOnwM0smxkqGjPRNwPw">↓</td></tr><tr data-page-node-id="D9W22pAKbxUem3e1OtFdYf"><td class='num' data-page-node-id="dx1QmjcanmMnXPgd3cOYBV">3500</td><td class='num' data-page-node-id="2E5t4UjMD1XstqghjWakUE">98</td><td class='num' data-page-node-id="FvHZzCIvR7bp4imnvUa2Tc">-0.024</td><td class='num' data-page-node-id="2lmoZeAFjJFvcDAWSDHTPL">-0.83</td><td class='num' data-page-node-id="6cPP7YDMFOS17pDHm8LRU2">+0.004</td><td class='num neg' data-page-node-id="TB4S1bizZYqTVJtAeLACgP">↓</td></tr><tr data-page-node-id="GfhaLUyda3yK1seuLDqIcO"><td class='num' data-page-node-id="Jy8jeZwgkhZlr5MTWHNWrN">3750</td><td class='num' data-page-node-id="mvwmKZUSvgnp1DqjRmXKIK">105</td><td class='num' data-page-node-id="Ttv4y63D9kMw7HPLt4nJHf">-0.024</td><td class='num' data-page-node-id="RPJDzeNrNRiZ4aAE9JYdgT">-0.63</td><td class='num' data-page-node-id="ckgFFF8ENmsEXikCe2ooRz">-0.006</td><td class='num neg' data-page-node-id="6rZ6HAlSOTL67x6HuVwmuf">↓</td></tr><tr data-page-node-id="HDRNRszwCeYDllNOfJR7Ic"><td class='num' data-page-node-id="CHj8ngyED1A8w1zyZEysmk">4000</td><td class='num' data-page-node-id="wLBpCTEKy8p5qNZ8Kwf7KA">112</td><td class='num' data-page-node-id="p8fYFISDqNKLnCBykOStd9">-0.029</td><td class='num' data-page-node-id="ICymNkKPtgCZ0padxa4hYE">-2.31</td><td class='num' data-page-node-id="M2BboHdGES4UDSIHgrxtVF">+0.018</td><td class='num neg' data-page-node-id="awhtZIHFm5WDFYcX7t9J7M">↓</td></tr></tbody></table></div>
+<p style="color:var(--ink2);font-size:12.5px;margin-top:8px" data-page-node-id="bSb6DyhEhDfZEuqd3MTw1K">
+（表内为 A/D 两池 60 个种子的逐检查点平均差：brk 一栏 16/16 全为负，
+而心情、修为占比两栏正负交替、无方向性 —— 所以 brk 是「系统性漂移」，心情/修为只是随机游走。）
+</p>
+</section>
+
+<section data-page-node-id="Wb2c9HuVuqMQpeAzVPL5Ur">
+<h2 data-page-node-id="CVGH1RnGaXg8sKhOET86rB">四、修复候选验证</h2>
+<p data-page-node-id="wzFJrrtSxj4vcoYicUOlMd">顺着「推进境界事件被稀释」这条线试了三个最小改动（都只动权重，不动任何文案与效果）：</p><ul data-page-node-id="YfCi7S4DS0OHA4yp5DdYTA"><li data-page-node-id="JedJ2vNvzJdzWv21DhYMD0"><b data-page-node-id="pspI5UhlFdHo03amX0DguT">N · 新增 21 条权重减半</b>（修复候选①：缩减分母）：飞升 3.60，相对原池 -15.0%，p≈0.000 —— <b data-page-node-id="X8xAYWWkSI11asFxsqcopY">❌ 仍然显著偏低</b></li><li data-page-node-id="lXk4PXWYirYSqxSvPdrdlz"><b data-page-node-id="9x34xdeSTz7FeRrC6KjaDh">P · 修炼类老吉事件权重 ×1.5</b>（修复候选②：补强分子）：飞升 4.03，相对原池 -4.9%，p≈0.099 —— <b data-page-node-id="ITyHyAa6KQCSuTIwGXHCFM">✅ 已回到与原池无统计显著差异</b></li><li data-page-node-id="rRWMKe5tbsiGByn0eFPNbB"><b data-page-node-id="Dv7QBD3f9JzBG5hNZR1Xpc">P2 · 修炼类老吉事件权重 ×2.0</b>（修复候选③：再加码）：飞升 4.46，相对原池 +5.1%，p≈0.091 —— <b data-page-node-id="y2KWFQD8CYfAgp2PMRjhSG">✅ 已回到与原池无统计显著差异</b></li></ul><p style='font-size:13px;color:#5b6472' data-page-node-id="h96E2uMMfVX47m3mIDQNVo">顺带一个反直觉的结果：<b data-page-node-id="E1HuAJIAWJhkEKxyfJi3R4">N（把新增事件权重减半）反而更差</b>（-15.0%）。说明那 16 条新 eff 事件本身是<b data-page-node-id="jy6Dq76LtdSYIPNHFSXoUE">净正向</b>的（它们给心情、给材料、给修炼速度），真正的问题不在「新增了什么」，而在<b data-page-node-id="8detLq7XhQKjD0rk6Kjk8S">「老的有效事件被摊薄了」</b>。所以正确的做法是<b data-page-node-id="Z0AUuIecFY6aZTBoK710xf">补分子</b>，而不是压分母。</p><div class='ok' style='margin-top:12px' data-page-node-id="CyNbQD5q2aytPY9A78S8dP">修复方向成立：<b data-page-node-id="Z1g5d9JnI1I5A9donmmaR2">把被稀释的「推进境界」吉事件权重补回来</b>，就能把差距收回到统计噪声内。推荐档位参考 <b data-page-node-id="wgcBdWzEH0vVQTu7a9DWUb">P · 修炼类老吉事件权重 ×1.5</b>（-4.9%，p≈0.099）——只改一个权重数字，零文案改动、零代码改动。</div>
+</section>
+
+<section data-page-node-id="k7ABWuMGVUen8QOM47CO0a">
+<h2 data-page-node-id="fOZJYGDWlBhNNumVSHGfXr">五、顺带确认没变的</h2>
+<ul data-page-node-id="5Mu0KCZCRXTRGTaL0CxtYL">
+  <li data-page-node-id="uf1Lpf3pydcdhJoRAXR4BA"><b data-page-node-id="7s6rxL2Qn2OsKJPjUl78GA">上限没变</b>：所有臂的「最高境界」都是 <b data-page-node-id="tKUgIoyqbqQtKu2mv5y3T8">8</b>（标准差 ≈0），饱和值完全一致 —— 影响只在速度/数量。</li>
+  <li data-page-node-id="qyRNFz6cJ18P4ZE2TZcb8P"><b data-page-node-id="Z6ZPf4MBvGnR3vBzZzIZgp">经济没变</b>：各臂都未出现灵石枯竭，门徒规模（累计约 30 人、存续约 10 人）与庇护人数一致。</li>
+  <li data-page-node-id="EXE7LNEBrYpiwEWZVBhXRF"><b data-page-node-id="vMpzzqTH8il64RGBrAV8gX">旧逻辑零改动</b>：A 臂就是原 29 条走老的字面匹配路径，其余臂的差异全部来自新增内容。</li>
+  <li data-page-node-id="IaMg3aB4QQ0jVGLnKOGiAQ"><b data-page-node-id="BpXzvCWu8oBLyWizKEf37A">文法宝的「death」词条</b>在无头长跑中不走装备流程（装备只能由玩家在界面操作），因此不影响本实验。</li>
+</ul>
+</section>
+
+<section data-page-node-id="biSoMHF5KiUyPSKRsyM2AP">
+<h2 data-page-node-id="5CQ4IvkNzGpfJOYfZf92r6">六、方法、可信度与一次事故</h2>
+<h3 data-page-node-id="CLnbeKqBPvk0WsPZgFx7i4">方法</h3>
+<ul data-page-node-id="GPOAZoGQmBBkpEnBLl2IHw">
+  <li data-page-node-id="NPClSAAMHdMcA5zc0lLVUq">变体通过替换 <code data-page-node-id="kw7ZOeIoxItN1Gm8KJMZ11">DataCore.gd</code> 的 EVENTS 块构造，每次替换后先 <code data-page-node-id="LMPH8DYpG0pTwsFEoX5GBM">--import</code>，
+      再用探针校验<b data-page-node-id="RI5trbpkh9EGrzIMDZc6cT">事件池条数</b>，跑完还原。A/B/C 三个臂里堕魔权重<b data-page-node-id="usyWaMcGJrq6x4PzGqTf5L">还原为扩展前的 2</b>；D 臂就是线上文件本体。</li>
+  <li data-page-node-id="43YsMbL6EF2C0gCsBk5LhM"><b data-page-node-id="oq3pHJokmEwccCd2TrfqOi">对照臂 E</b>（内容与线上完全相同、只是由脚本重写文件）：n=300，
+      均值 3.85 vs D 的 3.85，标准差 1.72 vs 1.72，
+      逐种子结果<b data-page-node-id="WYRTiZcUa3uzRbWfv2EqjX">完全相同</b>
+      → 证明「改写文件」本身没有副作用，所有差异都来自事件池内容。</li>
+  <li data-page-node-id="bVLYGUpYUvk98pj3WB7fRx"><code data-page-node-id="cDZy44MCaxvyGMh345IzQx">_weight()</code> 只消耗 <b data-page-node-id="Auhmi5p2HrczFKDhiziYjV">1 个</b> <code data-page-node-id="dkObVUNP9HWSUnTerAkQPE">randf()</code>，所以池的大小与顺序都不影响抽取概率 —— 稀释可以用权重直接解析计算。</li>
+  <li data-page-node-id="MnBLGfmJbb6ocz7fpmKTvl">但不同池消耗的随机数<b data-page-node-id="ouTELBsKrFjZ2zKwFg1GF4">个数</b>不同，所以同一批种子在各臂下走的是不同随机路径。
+      <b data-page-node-id="TbmJEP6ebXwqxDNbEmAtA6">单种子对比没有意义</b>，本报告只做分布层面的比较；并用连续种子（seq）与离散种子（spread）两种模式各复验一次。</li>
+  <li data-page-node-id="9qyHIeGAnEazsQtXPKxClL">显著性用 Welch t 检验（不假设方差相等），p 由 scipy t 分布给出；探针以 16 进程并行执行。</li>
+</ul>
+<h3 data-page-node-id="YVHR3BA1rflxV5ca65j9VZ">事故记录（已修复，如实记录）</h3>
+<div class="warn" data-page-node-id="KqdgtRBfWFe3qk6252GcCc">
+早期版本的实验驱动<b data-page-node-id="gtpkyrMIxkPwZci52Pfmv7">直接改写生产 <code data-page-node-id="BMtzR1NUfAJjzdAoMIQHQs">DataCore.gd</code></b>，一次运行被中断后
+<code data-page-node-id="cHQGPQAJw0LGgzroofXAYi">finally</code> 未执行，生产文件被留在「29 条」的变体状态；
+自动备份又恰好也是变体（45 条），两个备份都不可用。<br data-page-node-id="YhNUrpcOR7Wn0aYA8REjBW">
+<b data-page-node-id="sa8JdgTSDHSjtWHULLylbo">恢复方式</b>：以事件总表 xlsx 的标准顺序与权重为准，从变体文件中按文案取回原始行（eff 数组原样保留），
+补齐 5 条新增平常事件，重建出完整 50 条。恢复后通过了三重校验：
+<code data-page-node-id="B33qLKWSbOpKq6lnk0iZR2">build.py</code> 交叉校验（与 xlsx 逐条比对）、EffTest 63/63、LogicTest 112/112、AlignmentTest 45/45、UISmoke 108/108。<br data-page-node-id="XaHFBlCosChc2F9BenmZeh">
+<b data-page-node-id="J9oRHCCkfJFKuJZ7CBulpE">已改掉的做法</b>：现在所有实验都在 <code data-page-node-id="aKRgOADvO5gYwlQmSJEkmH">.ab/work/</code> 的<b data-page-node-id="7fB3wNXVpsCGThBtu6e7NE">工程副本</b>里跑，生产文件全程只读，
+驱动末尾还有 <code data-page-node-id="S7wY8pzZCFygQeE8c0aA5T">assert</code> 断言生产文件未被触碰。
+</div>
+<ul data-page-node-id="lKXqKWA2RESh90oIAmhQHr">
+  <li data-page-node-id="Qj8TCJ0CtpcLeMhqcazAYA">原始数据 <code data-page-node-id="r4phFfUrrVw0u9gyE4ZLuU">.ab/raw_n*.json</code>；曲线 <code data-page-node-id="thPFpEkZv1VVi1A81Q6qMU">.ab/cp_diff.csv</code></li>
+  <li data-page-node-id="cn9y8YBwiMYgQwWiD8KK8V">驱动 <code data-page-node-id="oFrq2yzlR5yzw1OM6CSw3z">.ab/ab_test.py</code>（臂对照）、<code data-page-node-id="QmJ0okbvgvI4fbKzkOhajf">.ab/ab_trace.py</code>（时间序列）、<code data-page-node-id="MojFE0hafGKZb8bkOF3gYF">.ab/restore_dc.py</code>（重建）</li>
+  <li data-page-node-id="2GZpuDW6ZYiFn893vRJ2nc">探针 <code data-page-node-id="5r5Z3lXPCcmt72PV79ipAk">scripts/test/LongRunProbe.gd</code>、<code data-page-node-id="kSqIWP07pWPLEWX39aJrDV">scripts/test/LongRunTrace.gd</code></li>
+</ul>
+</section>
+
+<footer data-page-node-id="lBMGNsee2XKsSBJtlinBwz">由 <code data-page-node-id="SUXFgBw6HmV1iZYaKyLxNt">.ab/ab_report.py</code> 从原始数据自动生成，所有数字可复现。</footer>
+</div></body></html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>修仙门派 · 事件扩展审阅单</title>
+<style>
+  :root {
+    --bg:#f6f7f9; --card:#ffffff; --line:#e4e7ec; --ink:#1c1f23; --ink2:#5b6472;
+    --g:#1f7a45; --gbg:#e8f5ec; --b:#b4232a; --bbg:#fdecec;
+    --n:#4a5568; --nbg:#eef1f5; --l:#a0449a; --lbg:#f9ebf7; --d:#7b3fb8; --dbg:#f1e9fb;
+    --eff:#0b5fa5; --effbg:#e7f1fb;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; padding:28px 20px 60px; background:var(--bg); color:var(--ink);
+         font:14px/1.65 "Segoe UI","Microsoft YaHei",system-ui,-apple-system,sans-serif; }
+  .wrap { max-width:1180px; margin:0 auto; }
+  header { margin-bottom:22px; }
+  h1 { font-size:22px; margin:0 0 6px; letter-spacing:.5px; }
+  .meta { color:var(--ink2); font-size:13px; }
+  .cards { display:flex; gap:12px; flex-wrap:wrap; margin:18px 0 26px; }
+  .kpi { flex:1 1 150px; background:var(--card); border:1px solid var(--line); border-radius:10px;
+         padding:12px 14px; }
+  .kpi b { display:block; font-size:20px; color:var(--ink); }
+  .kpi span { font-size:12px; color:var(--ink2); }
+  section { background:var(--card); border:1px solid var(--line); border-radius:12px;
+             padding:18px 18px 6px; margin-bottom:20px; }
+  h2 { font-size:16px; margin:0 0 4px; display:flex; align-items:center; gap:10px; }
+  .cnt { font-size:12px; font-weight:400; color:var(--ink2); background:var(--nbg);
+          border-radius:20px; padding:2px 10px; }
+  .sub { color:var(--ink2); font-size:12.5px; margin:0 0 14px; }
+  table { width:100%; border-collapse:collapse; margin-bottom:12px; }
+  th { text-align:left; font-size:12px; color:var(--ink2); font-weight:600;
+        border-bottom:2px solid var(--line); padding:8px 8px; white-space:nowrap; }
+  td { border-bottom:1px solid var(--line); padding:9px 8px; vertical-align:top; font-size:13px; }
+  td.num { color:var(--ink2); width:34px; }
+  td.cat, td.w, td.pct { white-space:nowrap; width:1%; }
+  td.pct { color:var(--ink2); }
+  td.txt { min-width:320px; }
+  td.eff { color:var(--eff); background:var(--effbg); border-radius:6px; }
+  .pill { display:inline-block; min-width:34px; text-align:center; border-radius:20px;
+           padding:1px 8px; font-size:12px; font-weight:600; }
+  .pill.g { color:var(--g); background:var(--gbg); }
+  .pill.b { color:var(--b); background:var(--bbg); }
+  .pill.n { color:var(--n); background:var(--nbg); }
+  .pill.l { color:var(--l); background:var(--lbg); }
+  .pill.d { color:var(--d); background:var(--dbg); }
+  .tag { display:inline-block; font-size:11px; border-radius:20px; padding:1px 8px; margin-left:6px; }
+  .tag.eff { color:var(--eff); background:#d6e8fa; }
+  .tag.neu { color:var(--n); background:#dfe4ea; }
+  code { background:#eef1f5; border-radius:4px; padding:1px 5px; font-size:12.5px; }
+  footer { color:var(--ink2); font-size:12px; text-align:center; margin-top:24px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>修仙门派 · 随机事件扩展审阅单</h1>
+  <div class="meta">29 条 → 50 条 ｜ 生成日期 2026-09-12 ｜ 数据已与 <code>DataCore.gd</code> 逐条交叉校验一致</div>
+  <div class="cards">
+    <div class="kpi"><b>50</b><span>事件总数</span></div>
+    <div class="kpi"><b>21</b><span>本次新增</span></div>
+    <div class="kpi"><b>16</b><span>走 eff 结构化</span></div>
+    <div class="kpi"><b>9</b><span>原文案修订</span></div>
+    <div class="kpi"><b>216</b><span>权重合计</span></div>
+  </div>
+</header>
+<section>
+  <h2>A · 本次新增（走 eff 结构化）<span class="cnt">16 条</span></h2>
+  <p class="sub">这 16 条由 eff 字段精确接管：不会再有系统自动追加的 ±10 心情，文案里写的「心情 +N」就是实际生效值，做到文案 = 效果。</p>
+  <table>
+    <thead><tr><th>#</th><th>类别</th><th>权重</th><th>占比</th><th>事件文案</th><th>实际生效效果</th></tr></thead>
+    <tbody><tr class="r-g">
+  <td class="num">13</td>
+  <td class="cat"><span class="pill g">吉</span></td>
+  <td class="w">5</td>
+  <td class="pct">2.3%</td>
+  <td class="txt">{n}依古方采药炼丹，在丹炉前守了三日三夜，终成一炉好药。丹药 +1（随机一味）；心情 +10</td>
+  <td class="eff">心情 +10；随机一味丹药 +1 <span class="tag eff">eff 结构化</span></td>
+</tr><tr class="r-g">
+  <td class="num">14</td>
+  <td class="cat"><span class="pill g">吉</span></td>
+  <td class="w">5</td>
+  <td class="pct">2.3%</td>
+  <td class="txt">{n}在药园深处移栽回一株野生灵草，悉心照料，长势喜人。灵草 +1（随机一种）；心情 +10</td>
+  <td class="eff">心情 +10；随机一种灵草 +1 <span class="tag eff">eff 结构化</span></td>
+</tr><tr class="r-g">
+  <td class="num">15</td>
+  <td class="cat"><span class="pill g">吉</span></td>
+  <td class="w">4</td>
+  <td class="pct">1.9%</td>
+  <td class="txt">{n}替宗门跑了趟坊市，低买高卖，颇有进项。灵石 +一笔（数目随缘）；心情 +10</td>
+  <td class="eff">心情 +10；灵石 += 500~5000×(1+境界×2) <span class="tag eff">eff 结构化</span></td>
+</tr><tr class="r-g">
+  <td class="num">16</td>
+  <td class="cat"><span class="pill g">吉</span></td>
+  <td class="w">4</td>
+  <td class="pct">1.9%</td>
+  <td class="txt">{n}在后山采石，一镐下去竟凿出块蕴灵矿石。矿石 +1（随机一种）；心情 +10</td>
+  <td class="eff">心情 +10；随机一种灵材 +1 <span class="tag eff">eff 结构化</span></td>
+</tr><tr class="r-g">
+  <td class="num">17</td>
+  <td class="cat"><span class="pill g">吉</span></td>
+  <td class="w">4</td>
+  <td class="pct">1.9%</td>
+  <td class="txt">{n}与同门论道三日，解开了多年积郁，心境澄明。心情 +30</td>
+  <td class="eff">心情 +30（精确值，不叠加通用 +10） <span class="tag eff">eff 结构化</span></td>
+</tr><tr class="r-g">
+  <td class="num">18</td>
+  <td class="cat"><span class="pill g">吉</span></td>
+  <td class="w">3</td>
+  <td class="pct">1.4%</td>
+  <td class="txt">{n}枯坐崖顶参悟旬月，忽觉经脉通达，气机大畅。修炼速度 +5%；心情 +10</td>
+  <td class="eff">心情 +10；灵气回复率 +5% <span class="tag eff">eff 结构化</span></td>
+</tr><tr class="r-g">
+  <td class="num">19</td>
+  <td class="cat"><span class="pill g">吉</span></td>
+  <td class="w">3</td>
+  <td class="pct">1.4%</td>
+  <td class="txt">{n}在坊市拍卖会上捡了个漏，得一件趁手法宝。法宝 +1；心情 +10</td>
+  <td class="eff">心情 +10；随机法宝 +1（品阶随境界） <span class="tag eff">eff 结构化</span></td>
+</tr><tr class="r-g">
+  <td class="num">20</td>
+  <td class="cat"><span class="pill g">吉</span></td>
+  <td class="w">3</td>
+  <td class="pct">1.4%</td>
+  <td class="txt">{n}雷雨夜独登绝顶，硬撼一道天雷而不倒。武力 +15%；心情 +15</td>
+  <td class="eff">心情 +15；武力加成 +15% <span class="tag eff">eff 结构化</span></td>
+</tr><tr class="r-b">
+  <td class="num">28</td>
+  <td class="cat"><span class="pill b">凶</span></td>
+  <td class="w">4</td>
+  <td class="pct">1.9%</td>
+  <td class="txt">{n}的丹炉炸了膛，一炉丹药尽毁。丹药 -1（随机一味）；心情 -10</td>
+  <td class="eff">心情 -10；随机一味丹药 -1（只在有存量的丹药里扣） <span class="tag eff">eff 结构化</span></td>
+</tr><tr class="r-b">
+  <td class="num">29</td>
+  <td class="cat"><span class="pill b">凶</span></td>
+  <td class="w">4</td>
+  <td class="pct">1.9%</td>
+  <td class="txt">{n}打理药园时失手，毁了半圃灵草。灵草 -1（随机一种）；心情 -10</td>
+  <td class="eff">心情 -10；随机一种灵草 -1（只在有存量的品类里扣） <span class="tag eff">eff 结构化</span></td>
+</tr><tr class="r-b">
+  <td class="num">30</td>
+  <td class="cat"><span class="pill b">凶</span></td>
+  <td class="w">4</td>
+  <td class="pct">1.9%</td>
+  <td class="txt">{n}在坊市被人做局，折了一大笔灵石。灵石 -一笔（数目随缘）；心情 -10</td>
+  <td class="eff">心情 -10；灵石 -= 500~5000（不带境界倍率） <span class="tag eff">eff 结构化</span></td>
+</tr><tr class="r-b">
+  <td class="num">31</td>
+  <td class="cat"><span class="pill b">凶</span></td>
+  <td class="w">3</td>
+  <td class="pct">1.4%</td>
+  <td class="txt">{n}强行冲击瓶颈，气血翻涌，险些走火入魔。突破几率 -5%；心情 -10</td>
+  <td class="eff">心情 -10；突破加成 -5% <span class="tag eff">eff 结构化</span></td>
+</tr><tr class="r-b">
+  <td class="num">32</td>
+  <td class="cat"><span class="pill b">凶</span></td>
+  <td class="w">3</td>
+  <td class="pct">1.4%</td>
+  <td class="txt">{n}所修功法出了纰漏，丹田受损。修为 -20%（按上限计）；心情 -10</td>
+  <td class="eff">心情 -10；当前修为 - 上限×20% <span class="tag eff">eff 结构化</span></td>
+</tr><tr class="r-b">
+  <td class="num">33</td>
+  <td class="cat"><span class="pill b">凶</span></td>
+  <td class="w">3</td>
+  <td class="pct">1.4%</td>
+  <td class="txt">{n}在荒野遇上伙劫修，苦战一场方才脱身。心情 -30</td>
+  <td class="eff">心情 -30（精确值，不叠加通用 -10） <span class="tag eff">eff 结构化</span></td>
+</tr><tr class="r-l">
+  <td class="num">48</td>
+  <td class="cat"><span class="pill l">情缘</span></td>
+  <td class="w">5</td>
+  <td class="pct">2.3%</td>
+  <td class="txt">{n}与{m}一同下山采买，归途遇雨共避一檐，相顾无言，耳根却红了。心情 +15</td>
+  <td class="eff">心情 +15 <span class="tag eff">eff 结构化</span></td>
+</tr><tr class="r-l">
+  <td class="num">49</td>
+  <td class="cat"><span class="pill l">情缘</span></td>
+  <td class="w">3</td>
+  <td class="pct">1.4%</td>
+  <td class="txt">{n}与{m}历经波折终成眷属，同修之路再不孤单。心情 +15</td>
+  <td class="eff">心情 +15；结为道侣（双方突破加成 +10%） <span class="tag eff">eff 结构化</span></td>
+</tr></tbody>
+  </table>
+</section><section>
+  <h2>B · 本次新增（纯剧情）<span class="cnt">5 条</span></h2>
+  <p class="sub">这 5 条为「平常」类，不产生任何数值影响，只用于丰富叙事。</p>
+  <table>
+    <thead><tr><th>#</th><th>类别</th><th>权重</th><th>占比</th><th>事件文案</th><th>实际生效效果</th></tr></thead>
+    <tbody><tr class="r-n">
+  <td class="num">40</td>
+  <td class="cat"><span class="pill n">平常</span></td>
+  <td class="w">7</td>
+  <td class="pct">3.2%</td>
+  <td class="txt">{n}在宗门山门外看了一整日的云，什么也没做。</td>
+  <td class="eff">无任何效果 <span class="tag neu">纯剧情</span></td>
+</tr><tr class="r-n">
+  <td class="num">41</td>
+  <td class="cat"><span class="pill n">平常</span></td>
+  <td class="w">6</td>
+  <td class="pct">2.8%</td>
+  <td class="txt">{n}与山下货郎闲聊半日，听了一肚子外面的事。</td>
+  <td class="eff">无任何效果 <span class="tag neu">纯剧情</span></td>
+</tr><tr class="r-n">
+  <td class="num">42</td>
+  <td class="cat"><span class="pill n">平常</span></td>
+  <td class="w">6</td>
+  <td class="pct">2.8%</td>
+  <td class="txt">{n}把旧年的符纸翻出来晒了晒，顺手烧掉几张。</td>
+  <td class="eff">无任何效果 <span class="tag neu">纯剧情</span></td>
+</tr><tr class="r-n">
+  <td class="num">43</td>
+  <td class="cat"><span class="pill n">平常</span></td>
+  <td class="w">5</td>
+  <td class="pct">2.3%</td>
+  <td class="txt">{n}夜里睡不着，独自在演武场数了一夜星星。</td>
+  <td class="eff">无任何效果 <span class="tag neu">纯剧情</span></td>
+</tr><tr class="r-n">
+  <td class="num">44</td>
+  <td class="cat"><span class="pill n">平常</span></td>
+  <td class="w">5</td>
+  <td class="pct">2.3%</td>
+  <td class="txt">{n}试着养了一盆灵植，第三日就枯了。</td>
+  <td class="eff">无任何效果 <span class="tag neu">纯剧情</span></td>
+</tr></tbody>
+  </table>
+</section><section>
+  <h2>C · 原有事件中本次修订文案的条目<span class="cnt">9 条</span></h2>
+  <p class="sub">这些是原 29 条里「文案声明」与「实际生效」长期对不上的条目，本次逐条改写文案使其与真实效果一致。</p>
+  <table>
+    <thead><tr><th>#</th><th>类别</th><th>权重</th><th>占比</th><th>事件文案</th><th>实际生效效果</th></tr></thead>
+    <tbody><tr class="r-g">
+  <td class="num">4</td>
+  <td class="cat"><span class="pill g">吉</span></td>
+  <td class="w">5</td>
+  <td class="pct">2.3%</td>
+  <td class="txt">{n}斩一恶蛟，取其筋为束带。武力 +一成（即 10%）</td>
+  <td class="eff">心情 +10；武力加成 +10%</td>
+</tr><tr class="r-g">
+  <td class="num">5</td>
+  <td class="cat"><span class="pill g">吉</span></td>
+  <td class="w">4</td>
+  <td class="pct">1.9%</td>
+  <td class="txt">{n}误入前人洞府，得遗泽若干。灵石 +一笔（数目随缘）</td>
+  <td class="eff">心情 +10；灵石 += 500~5000×(1+境界×2)</td>
+</tr><tr class="r-g">
+  <td class="num">6</td>
+  <td class="cat"><span class="pill g">吉</span></td>
+  <td class="w">4</td>
+  <td class="pct">1.9%</td>
+  <td class="txt">{n}于市集以三言两语点化一散修，对方感激之余赠以灵药。丹药 +1（随机一味）</td>
+  <td class="eff">心情 +10；随机一种丹药（1~9 号）+1</td>
+</tr><tr class="r-g">
+  <td class="num">7</td>
+  <td class="cat"><span class="pill g">吉</span></td>
+  <td class="w">3</td>
+  <td class="pct">1.4%</td>
+  <td class="txt">{n}与路过剑修论剑三日，剑意大进。武力 +10%，剑意圆满再进 +10%</td>
+  <td class="eff">心情 +10；武力加成 +20%</td>
+</tr><tr class="r-g">
+  <td class="num">10</td>
+  <td class="cat"><span class="pill g">吉</span></td>
+  <td class="w">2</td>
+  <td class="pct">0.9%</td>
+  <td class="txt">{n}收一灵兽为伴，日夜相伴不寂寞。心情 +10</td>
+  <td class="eff">心情 +10</td>
+</tr><tr class="r-b">
+  <td class="num">21</td>
+  <td class="cat"><span class="pill b">凶</span></td>
+  <td class="w">6</td>
+  <td class="pct">2.8%</td>
+  <td class="txt">{n}外出游历时与人结怨，被追杀三百里，所幸最终脱身。</td>
+  <td class="eff">心情 -10（通用）</td>
+</tr><tr class="r-b">
+  <td class="num">22</td>
+  <td class="cat"><span class="pill b">凶</span></td>
+  <td class="w">5</td>
+  <td class="pct">2.3%</td>
+  <td class="txt">{n}修炼时岔了气息，卧床半月。修为 -20%（按上限计）</td>
+  <td class="eff">心情 -10；当前修为 - 上限×20%</td>
+</tr><tr class="r-b">
+  <td class="num">23</td>
+  <td class="cat"><span class="pill b">凶</span></td>
+  <td class="w">4</td>
+  <td class="pct">1.9%</td>
+  <td class="txt">{n}在秘境中为一株灵草与人争斗，负伤而归。心情 -30</td>
+  <td class="eff">心情 -30（通用 -10 叠加规则 -20）</td>
+</tr><tr class="r-b">
+  <td class="num">25</td>
+  <td class="cat"><span class="pill b">凶</span></td>
+  <td class="w">3</td>
+  <td class="pct">1.4%</td>
+  <td class="txt">{n}借贷购置法宝，如今债主上门。灵石 -500~5000</td>
+  <td class="eff">心情 -10；灵石 -= 500~5000（不带境界倍率）</td>
+</tr></tbody>
+  </table>
+</section><section>
+  <h2>D · 权重调整<span class="cnt">6 条</span></h2>
+  <p class="sub">仅调权重，不改文案。</p>
+  <table>
+    <thead><tr><th>#</th><th>类别</th><th>权重</th><th>占比</th><th>事件文案</th><th>说明</th></tr></thead>
+    <tbody><tr class='r-g'><td class='num'>1</td><td class='cat'><span class='pill g'>吉</span></td><td class='w'>9</td><td class='pct'>4.2%</td><td class='txt'>{n}于山涧拾得一枚无名种子，随手埋下，翌日竟生出灵芽。修炼速度 +2%</td><td class='eff'>已调整（2026-09-12）：权重 6 → 9（×1.5），补回被扩容稀释的修炼类吉事件密度；文案未提及通用心情 +10</td></tr><tr class='r-g'><td class='num'>2</td><td class='cat'><span class='pill g'>吉</span></td><td class='w'>9</td><td class='pct'>4.2%</td><td class='txt'>{n}在旧书堆中翻出一卷残篇，参悟三日，若有所得。修炼速度 +3%</td><td class='eff'>已调整（2026-09-12）：权重 6 → 9（×1.5），补回被扩容稀释的修炼类吉事件密度；文案未提及通用心情 +10</td></tr><tr class='r-g'><td class='num'>3</td><td class='cat'><span class='pill g'>吉</span></td><td class='w'>8</td><td class='pct'>3.7%</td><td class='txt'>{n}夜观星象，忽有所悟，头顶灵气如虹。修为 +{q}</td><td class='eff'>已调整（2026-09-12）：权重 5 → 8（×1.5），补回被扩容稀释的修炼类吉事件密度；数值与文案一致</td></tr><tr class='r-g'><td class='num'>9</td><td class='cat'><span class='pill g'>吉</span></td><td class='w'>3</td><td class='pct'>1.4%</td><td class='txt'>{n}于雷劫中窥见一线生机，心境圆满。突破几率 +5%</td><td class='eff'>已调整（2026-09-12）：权重 2 → 3（×1.5），补回被扩容稀释的修炼类吉事件密度；文案未提及通用心情 +10</td></tr><tr class='r-g'><td class='num'>12</td><td class='cat'><span class='pill g'>吉</span></td><td class='w'>3</td><td class='pct'>1.4%</td><td class='txt'>{n}梦中得仙人授法，醒来泪流满面。修炼速度 +20%</td><td class='eff'>已调整（2026-09-12）：权重 2 → 3（×1.5），补回被扩容稀释的修炼类吉事件密度；文案未提及通用心情 +10</td></tr><tr class='r-d'><td class='num'>50</td><td class='cat'><span class='pill d'>堕魔</span></td><td class='w'>4</td><td class='pct'>1.9%</td><td class='txt'>{n}无法突破心魔，堕为魔修，从此再无回头路。</td><td class='eff'>已调整（2026-09-12）：权重 2 → 4，与 DataCore.gd 对齐</td></tr></tbody>
+  </table>
+</section>
+<footer>文案里的数值 = 实际生效数值（eff 事件）；原 29 条走字面匹配的老逻辑，行为未变。</footer>
+</div>
+</body>
+</html>
