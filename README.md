@@ -123,6 +123,33 @@ godot --headless --path . --export-release "Web" "$(pwd)/docs/index.html"
 
 > 也可以用 CLI 部署：`npx vercel --prod`（首次会引导登录并绑定项目）。
 
+### 绑定自定义子域名
+
+部署完成后，在 Vercel 项目里绑定自己的域名即可。以 `xiuxian.449997.xyz` 为例：
+
+1. Vercel 项目 → **Settings** → **Domains** → 输入 `xiuxian.449997.xyz` → **Add**
+2. 若 Vercel 提示需要添加 DNS 记录，在域名 DNS 处添加：
+
+   | 类型 | 名称 | 值 | TTL |
+   |---|---|---|---|
+   | CNAME | `xiuxian` | `cname.vercel-dns.com` | 自动 |
+
+   > 若该域名的 NS 已托管给 Vercel（`ns1.vercel-dns.com` / `ns2.vercel-dns.com`），
+   > Vercel 会自动写入这条记录，无需手动添加。
+
+3. 等待 1–5 分钟，Vercel 自动签发 Let's Encrypt 证书，
+   之后即可通过 `https://xiuxian.449997.xyz` 访问。
+
+验证是否生效：
+
+```bash
+nslookup xiuxian.449997.xyz
+curl -sI https://xiuxian.449997.xyz/ | head -3
+```
+
+> 若使用 GitHub Pages 托管，改为在仓库 `Settings → Pages → Custom domain` 填写域名，
+> 并在 `docs/` 下放一个名为 `CNAME` 的文件（内容为域名），DNS 侧 CNAME 指向 `yemoren.github.io`。
+
 ## 项目结构
 
 ```
