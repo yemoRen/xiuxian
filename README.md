@@ -55,6 +55,8 @@
 - **战斗与损耗**：镇魔峰除魔、寻幽峰探秘会按战果令参战成员承受「损耗」（当前武力折损），
   随时间缓慢恢复；秘境挫折还可能留下「伤势」，暂时压低恢复上限，可用「还春丹」消解
 - **轮回传承**：弟子寿终后转世，宗门积累延续
+- **移动端适配**：UI 与字体针对手机竖屏放大，支持手指上下拖动页面；
+  Web 版建宗时点击输入按钮即可填写掌门姓名与宗派名
 
 ## 本地运行
 
@@ -62,7 +64,7 @@ Web 版通过 HTTP 加载 wasm，**不能直接双击 `index.html`**（`file://`
 
 ### 方式一：玩现成的（推荐）
 
-1. 到 [Releases](https://github.com/yemoRen/xiuxian/releases) 下载 `xiuxian-web-v1.0.1.zip`
+1. 到 [Releases](https://github.com/yemoRen/xiuxian/releases) 下载 `xiuxian-web-v1.0.2.zip`
 2. 解压，进入目录
 3. 启动本地服务器：
 
@@ -183,11 +185,12 @@ xiuxian/
 
 ## 版本
 
-当前版本 **v1.0.1**，完整历史见 [CHANGELOG.md](CHANGELOG.md)。
+当前版本 **v1.0.2**，完整历史见 [CHANGELOG.md](CHANGELOG.md)。
 版本号遵循[语义化版本](https://semver.org/lang/zh-CN/)。
 
 | 版本 | 日期 | 说明 |
 |---|---|---|
+| [v1.0.2](https://github.com/yemoRen/xiuxian/releases/tag/v1.0.2) | 2026-09-14 | 移动端适配：输入兜底、手指拖动滚动、字号与 UI 放大 |
 | [v1.0.1](https://github.com/yemoRen/xiuxian/releases/tag/v1.0.1) | 2026-09-14 | 战斗损耗系统、经历着色、武力当前/最大显示、还春丹治伤势 |
 | [v1.0.0](https://github.com/yemoRen/xiuxian/releases/tag/v1.0.0) | 2026-09-14 | 首个公开版本，Web 版发布 |
 
