@@ -65,7 +65,7 @@ Web 版通过 HTTP 加载 wasm，**不能直接双击 `index.html`**（`file://`
 
 ### 方式一：玩现成的（推荐）
 
-1. 到 [Releases](https://github.com/yemoRen/xiuxian/releases) 下载 `xiuxian-web-v1.0.2.zip`
+1. 到 [Releases](https://github.com/yemoRen/xiuxian/releases) 下载 `xiuxian-web-v1.0.4.zip`
 2. 解压，进入目录
 3. 启动本地服务器：
 
@@ -186,11 +186,13 @@ xiuxian/
 
 ## 版本
 
-当前版本 **v1.0.2**，完整历史见 [CHANGELOG.md](CHANGELOG.md)。
+当前版本 **v1.0.4**，完整历史见 [CHANGELOG.md](CHANGELOG.md)。
 版本号遵循[语义化版本](https://semver.org/lang/zh-CN/)。
 
 | 版本 | 日期 | 说明 |
 |---|---|---|
+| [v1.0.4](https://github.com/yemoRen/xiuxian/releases/tag/v1.0.4) | 2026-09-15 | 灵根球视觉、「宣纸卷轴」界面质感体系、纪事卡状态色条 |
+| [v1.0.3](https://github.com/yemoRen/xiuxian/releases/tag/v1.0.3) | 2026-09-15 | 思源宋体 / 黑体接入、图标素材体系（30 枚）、包体瘦身 |
 | [v1.0.2](https://github.com/yemoRen/xiuxian/releases/tag/v1.0.2) | 2026-09-14 | 移动端适配：输入兜底、手指拖动滚动、字号与 UI 放大 |
 | [v1.0.1](https://github.com/yemoRen/xiuxian/releases/tag/v1.0.1) | 2026-09-14 | 战斗损耗系统、经历着色、武力当前/最大显示、还春丹治伤势 |
 | [v1.0.0](https://github.com/yemoRen/xiuxian/releases/tag/v1.0.0) | 2026-09-14 | 首个公开版本，Web 版发布 |
