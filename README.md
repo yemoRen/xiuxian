@@ -65,7 +65,7 @@ Web 版通过 HTTP 加载 wasm，**不能直接双击 `index.html`**（`file://`
 
 ### 方式一：玩现成的（推荐）
 
-1. 到 [Releases](https://github.com/yemoRen/xiuxian/releases) 下载 `xiuxian-web-v1.0.8.zip`
+1. 到 [Releases](https://github.com/yemoRen/xiuxian/releases) 下载 `xiuxian-web-v1.0.9.zip`
 2. 解压，进入目录
 3. 启动本地服务器：
 
@@ -186,11 +186,12 @@ xiuxian/
 
 ## 版本
 
-当前版本 **v1.0.8**，完整历史见 [CHANGELOG.md](CHANGELOG.md)。
+当前版本 **v1.0.9**，完整历史见 [CHANGELOG.md](CHANGELOG.md)。
 版本号遵循[语义化版本](https://semver.org/lang/zh-CN/)。
 
 | 版本 | 日期 | 说明 |
 |---|---|---|
+| [v1.0.9](https://github.com/yemoRen/xiuxian/releases/tag/v1.0.9) | 2026-09-16 | 三道天劫（九天雷劫 / 破妄灵劫 / 飞升玄劫）、重生三层替死、修炼曲线与寿元重平衡、冲关失败掉一成进度、洗孽池 50 级上限 |
 | [v1.0.8](https://github.com/yemoRen/xiuxian/releases/tag/v1.0.8) | 2026-09-16 | 全出血布局、门徒名册筛选排序与详情页鎏金、顶栏渐隐融合、状态栏真读、特质五类着色 |
 | [v1.0.7](https://github.com/yemoRen/xiuxian/releases/tag/v1.0.7) | 2026-09-16 | 建立宗门三步向导、灵根品质四颗示意图、灵根属性细分、自绘鎏金效率条 |
 | [v1.0.6](https://github.com/yemoRen/xiuxian/releases/tag/v1.0.6) | 2026-09-15 | 行动页「宗门编年」时间轴、正文语义着色、全屏手指滑动、经历页显示区域放大 |
