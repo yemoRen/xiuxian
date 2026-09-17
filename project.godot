@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="修仙门派"
-config/description="放置型修仙门派经营模拟 · 自《论如何建立一个修仙门派》玩法还原"
+config/name="我的掌上仙宗"
+config/description="放置型仙宗经营模拟 · 自《论如何建立一个修仙门派》玩法还原"
 run/main_scene="res://scenes/Main.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 
