@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
-		<title>修仙门派</title>
+		<title>我的掌上仙宗</title>
 		<style>
 html, body, #canvas {
 	margin: 0;
@@ -93,6 +93,7 @@ body {
 		<link id="-gd-engine-icon" rel="icon" type="image/png" href="index.icon.png" />
 <link rel="apple-touch-icon" href="index.apple-touch-icon.png"/>
 
+			<meta name="xb-version" content="1.1.0">
 	</head>
 	<body>
 		<canvas id="canvas">
@@ -111,7 +112,7 @@ body {
 
 		<script src="index.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":7825408,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":7845112,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
@@ -200,6 +201,7 @@ const engine = new Engine(GODOT_CONFIG);
 	} else {
 		setStatusMode('progress');
 		engine.startGame({
+				'mainPack': 'index.pck?v=1.1.0',
 			'onProgress': function (current, total) {
 				if (current > 0 && total > 0) {
 					statusProgress.value = current;
@@ -215,6 +217,44 @@ const engine = new Engine(GODOT_CONFIG);
 	}
 }());
 		</script>
+			<!-- XB_UPDATE_CHECK -->
+		<script>
+		(function () {
+			var CUR = "1.1.0";
+			function show(cur, latest) {
+				if (document.getElementById('xb-update-mask')) return;
+				var mask = document.createElement('div');
+				mask.id = 'xb-update-mask';
+				mask.style.cssText = 'position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.72);font-family:"Noto Sans","Droid Sans",Arial,sans-serif;';
+				var card = document.createElement('div');
+				card.style.cssText = 'max-width:82%;width:340px;background:#242424;border:1px solid #c8a45a;border-radius:14px;padding:22px 20px;color:#eee;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,.5);';
+				card.innerHTML = '<div style="font-size:17px;color:#e9c97a;margin-bottom:8px;font-weight:700;">游戏有更新版本</div>'
+					+ '<div style="font-size:13px;line-height:1.6;color:#cfcfcf;margin-bottom:6px;">当前 v' + cur + ' → 最新 v' + latest + '</div>'
+					+ '<div style="font-size:12px;color:#9a9a9a;margin-bottom:16px;">点击刷新即可加载最新版本</div>';
+				var btn = document.createElement('button');
+				btn.textContent = '立即刷新';
+				btn.style.cssText = 'display:block;width:100%;padding:11px 0;border:0;border-radius:9px;background:#c8a45a;color:#2a1d05;font-size:15px;font-weight:700;cursor:pointer;';
+				btn.onclick = function () { location.search = '?v=' + encodeURIComponent(latest); };
+				var later = document.createElement('div');
+				later.textContent = '稍后再说';
+				later.style.cssText = 'margin-top:10px;font-size:12px;color:#8a8a8a;cursor:pointer;';
+				later.onclick = function () { mask.remove(); };
+				card.appendChild(btn);
+				card.appendChild(later);
+				mask.appendChild(card);
+				document.body.appendChild(mask);
+			}
+			try {
+				fetch('version.json?t=' + Date.now(), { cache: 'no-store' })
+					.then(function (r) { return r.json(); })
+					.then(function (d) {
+						if (d && d.version && d.version !== CUR) { show(CUR, d.version); }
+					})
+					.catch(function () {});
+			} catch (e) {}
+		})();
+		</script>
+
 	</body>
 </html>
 
