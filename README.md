@@ -186,11 +186,12 @@ xiuxian/
 
 ## 版本
 
-当前版本 **v1.1.3**，完整历史见 [CHANGELOG.md](CHANGELOG.md)。
+当前版本 **v1.1.4**，完整历史见 [CHANGELOG.md](CHANGELOG.md)。
 版本号遵循[语义化版本](https://semver.org/lang/zh-CN/)。
 
 | 版本 | 日期 | 说明 |
 |---|---|---|
+| [v1.1.4](https://github.com/yemoRen/xiuxian/releases/tag/v1.1.4) | 2026-09-18 | 除魔惨胜与陨落重做、加权编制、周期随难度指数上升、庇护前平后陡、香火与杂役转化下调、藏经楼 6%→2% 修复 |
 | [v1.1.3](https://github.com/yemoRen/xiuxian/releases/tag/v1.1.3) | 2026-09-18 | 逐出宗门、解除师徒、大比到点自动暂停、收徒/拜师限内门、聚灵阵实装与灵石月凝、选人弹窗卡死修复、通知条宣纸化 |
 | [v1.1.2](https://github.com/yemoRen/xiuxian/releases/tag/v1.1.2) | 2026-09-18 | 门徒详情弹窗误触修复、宗门大比弹窗 UI 重做（步骤条 / 整卡选中 / 战报卡） |
 | [v1.1.1](https://github.com/yemoRen/xiuxian/releases/tag/v1.1.1) | 2026-09-18 | 杂役效率改每人和 1%、大比弹窗点选修复、常驻悬浮「回到最新」 |
