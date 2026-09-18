@@ -186,11 +186,15 @@ xiuxian/
 
 ## 版本
 
-当前版本 **v1.0.10**，完整历史见 [CHANGELOG.md](CHANGELOG.md)。
+当前版本 **v1.1.3**，完整历史见 [CHANGELOG.md](CHANGELOG.md)。
 版本号遵循[语义化版本](https://semver.org/lang/zh-CN/)。
 
 | 版本 | 日期 | 说明 |
 |---|---|---|
+| [v1.1.3](https://github.com/yemoRen/xiuxian/releases/tag/v1.1.3) | 2026-09-18 | 逐出宗门、解除师徒、大比到点自动暂停、收徒/拜师限内门、聚灵阵实装与灵石月凝、选人弹窗卡死修复、通知条宣纸化 |
+| [v1.1.2](https://github.com/yemoRen/xiuxian/releases/tag/v1.1.2) | 2026-09-18 | 门徒详情弹窗误触修复、宗门大比弹窗 UI 重做（步骤条 / 整卡选中 / 战报卡） |
+| [v1.1.1](https://github.com/yemoRen/xiuxian/releases/tag/v1.1.1) | 2026-09-18 | 杂役效率改每人和 1%、大比弹窗点选修复、常驻悬浮「回到最新」 |
+| [v1.1.0](https://github.com/yemoRen/xiuxian/releases/tag/v1.1.0) | 2026-09-18 | 更名「我的掌上仙宗」、生产体系（品阶选择/基准工时）与宗门大比重做 |
 | [v1.0.10](https://github.com/yemoRen/xiuxian/releases/tag/v1.0.10) | 2026-09-17 | 功法强度与撰写人造诣挂钩、堕魔节奏放缓、死亡类功法取负、新增 50 条行动事件、寒潭灵脉 +10% |
 | [v1.0.9](https://github.com/yemoRen/xiuxian/releases/tag/v1.0.9) | 2026-09-16 | 三道天劫（九天雷劫 / 破妄灵劫 / 飞升玄劫）、重生三层替死、修炼曲线与寿元重平衡、冲关失败掉一成进度、洗孽池 50 级上限 |
 | [v1.0.8](https://github.com/yemoRen/xiuxian/releases/tag/v1.0.8) | 2026-09-16 | 全出血布局、门徒名册筛选排序与详情页鎏金、顶栏渐隐融合、状态栏真读、特质五类着色 |
