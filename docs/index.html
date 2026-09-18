@@ -93,7 +93,7 @@ body {
 		<link id="-gd-engine-icon" rel="icon" type="image/png" href="index.icon.png" />
 <link rel="apple-touch-icon" href="index.apple-touch-icon.png"/>
 
-			<meta name="xb-version" content="1.1.1">
+			<meta name="xb-version" content="1.1.2">
 	</head>
 	<body>
 		<canvas id="canvas">
@@ -112,7 +112,7 @@ body {
 
 		<script src="index.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":7846888,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":7856784,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
@@ -201,7 +201,7 @@ const engine = new Engine(GODOT_CONFIG);
 	} else {
 		setStatusMode('progress');
 		engine.startGame({
-				'mainPack': 'index.pck?v=1.1.1',
+				'mainPack': 'index.pck?v=1.1.2',
 			'onProgress': function (current, total) {
 				if (current > 0 && total > 0) {
 					statusProgress.value = current;
@@ -220,7 +220,7 @@ const engine = new Engine(GODOT_CONFIG);
 			<!-- XB_UPDATE_CHECK -->
 		<script>
 		(function () {
-			var CUR = "1.1.1";
+			var CUR = "1.1.2";
 			function show(cur, latest) {
 				if (document.getElementById('xb-update-mask')) return;
 				var mask = document.createElement('div');
