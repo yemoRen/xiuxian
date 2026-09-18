@@ -39,8 +39,8 @@
 | 职务 | 效率权重 |
 |---|---|
 | 峰主 | 100% |
-| 副手 | 50% |
-| 外门弟子 | 20% |
+| 副手 | 30% |
+| 外门弟子 | 10% |
 | 杂役弟子 | 每人 +1%（单峰上限 100 人、全宗上限 300 人） |
 
 杂役弟子上限：全宗 300 人，单峰最多 100 人（需自行分配）。
@@ -65,7 +65,7 @@ Web 版通过 HTTP 加载 wasm，**不能直接双击 `index.html`**（`file://`
 
 ### 方式一：玩现成的（推荐）
 
-1. 到 [Releases](https://github.com/yemoRen/xiuxian/releases) 下载 `xiuxian-web-v1.0.10.zip`
+1. 到 [Releases](https://github.com/yemoRen/xiuxian/releases) 下载 `xiuxian-web-1.1.5.zip`
 2. 解压，进入目录
 3. 启动本地服务器：
 
@@ -162,7 +162,7 @@ xiuxian/
 ├── docs/                  # Web 构建产物（GitHub Pages 发布源）
 │   ├── index.html
 │   ├── index.wasm         # ~39 MB
-│   └── index.pck          # 游戏资源包 ~5.5 MB
+│   └── index.pck          # 游戏资源包 ~7.6 MB
 ├── scenes/                # Godot 场景
 ├── scripts/
 │   ├── autoload/          # 全局单例
@@ -186,11 +186,12 @@ xiuxian/
 
 ## 版本
 
-当前版本 **v1.1.4**，完整历史见 [CHANGELOG.md](CHANGELOG.md)。
+当前版本 **v1.1.5**，完整历史见 [CHANGELOG.md](CHANGELOG.md)。
 版本号遵循[语义化版本](https://semver.org/lang/zh-CN/)。
 
 | 版本 | 日期 | 说明 |
 |---|---|---|
+| [v1.1.5](https://github.com/yemoRen/xiuxian/releases/tag/v1.1.5) | 2026-09-18 | 法宝公库分页 / 部位筛选 / 品阶降序、穿戴弹窗补全法宝属性、除魔战利品副手权重 50%→30% |
 | [v1.1.4](https://github.com/yemoRen/xiuxian/releases/tag/v1.1.4) | 2026-09-18 | 除魔惨胜与陨落重做、加权编制、周期随难度指数上升、庇护前平后陡、香火与杂役转化下调、藏经楼 6%→2% 修复 |
 | [v1.1.3](https://github.com/yemoRen/xiuxian/releases/tag/v1.1.3) | 2026-09-18 | 逐出宗门、解除师徒、大比到点自动暂停、收徒/拜师限内门、聚灵阵实装与灵石月凝、选人弹窗卡死修复、通知条宣纸化 |
 | [v1.1.2](https://github.com/yemoRen/xiuxian/releases/tag/v1.1.2) | 2026-09-18 | 门徒详情弹窗误触修复、宗门大比弹窗 UI 重做（步骤条 / 整卡选中 / 战报卡） |
@@ -214,7 +215,7 @@ xiuxian/
 
 **原创拓展**（部分）：
 
-- **七峰职务与加权效率模型** —— 峰主 100% / 副手 50% / 外门 20% / 杂役每人 +1%，
+- **七峰职务与加权效率模型** —— 峰主 100% / 副手 30% / 外门 10% / 杂役每人 +1%，
   并区分"探索型"与"生产型"峰的效率属性
 - **杂役弟子编制管理** —— 独立人口池、按旬分配、全宗 300 / 单峰 100 双层上限
 - **产出门槛判定** —— 四座资源峰未达人员门槛时零产出，杜绝"空峰白嫖"
